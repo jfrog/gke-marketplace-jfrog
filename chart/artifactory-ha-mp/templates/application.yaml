@@ -24,7 +24,32 @@ spec:
     - description: 'JFrog Artifactory Chart'
       url: https://github.com/jfrog/charts
     notes: |-
-      JFrog Artifactory
+      ## Congratulations. You have just deployed JFrog Artifactory HA!
+
+      ## DATABASE:
+      To extract the database password, run the following
+      ```shell
+      export DB_PASSWORD=$(kubectl get --namespace {{ .Release.Namespace }} $(kubectl get secret --namespace {{ .Release.Namespace }} -o name | grep postgresql) -o jsonpath="{.data.postgres-password}" | base64 --decode)
+      echo ${DB_PASSWORD}
+      ```
+
+      ## SETUP:
+      1. Get the Artifactory IP and URL
+         NOTE: It may take a few minutes for the LoadBalancer public IP to be available!
+
+         You can watch the status of the service by running `kubectl get svc -w {{ .Release.Name }}-nginx --namespace {{ .Release.Namespace }}`
+         ```shell
+         export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ .Release.Name }}-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+         echo http://$SERVICE_IP/
+         ```
+
+      2. Open Artifactory in your browser
+         Default credential for Artifactory:
+         user:     admin
+         password: password
+
+      3. Add HA licenses to activate Artifactory HA through the Artifactory UI
+         NOTE: Each Artifactory node requires a valid license. See [HA Installation and Setup](https://www.jfrog.com/confluence/display/RTF/HA+Installation+and+Setup) for more details.
   selector:
     matchLabels:
       app.kubernetes.io/name: "{{ .Release.Name }}"

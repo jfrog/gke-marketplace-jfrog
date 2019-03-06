@@ -9,11 +9,11 @@ properties:
     type: string
     x-google-marketplace:
       type: NAMESPACE
-  serviceAccount.name:
+  artifactory-ha.serviceAccount.name:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
-  postgresql.postgresPassword:
+  artifactory-ha.postgresql.postgresPassword:
     type: string
     x-google-marketplace:
       type: GENERATED_PASSWORD
@@ -21,29 +21,41 @@ properties:
         length: 16
         includeSymbols: False  # Default is False
         base64: True           # Default is True
-  artifactory.masterKey:
+  artifactory-ha.artifactory.masterKey:
     title: 'Artifactory requires a unique master key'
     description: 'You can generate one with the command: openssl rand -hex 32'
     default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
     type: string
-  artifactory.node.replicaCount:
+  artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: 'Artifactory Member Node count'
     description: 'Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)'
     default: 2
     minimum: 1
     maximum: 10
-  nginx.service.type:
+  artifactory-ha.artifactory.image.repository:
+    type: string
+    default: gcr.io/jfrog-gc-mp/jfrog/artifactory-pro
+    x-google-marketplace:
+      type: IMAGE
+  artifactory-ha.nginx.service.type:
     title: 'Nginx Service Type'
     description: 'Nginx Service Type'
     default: 'LoadBalancer'
     type: string
+  artifactory-ha.nginx.image.repository:
+    type: string
+    default: gcr.io/jfrog-gc-mp/jfrog/nginx-artifactory-pro
+    x-google-marketplace:
+      type: IMAGE
 
 required:
 - name
 - namespace
-- serviceAccount.name
-- postgresql.postgresPassword
-- artifactory.masterKey
-- artifactory.node.replicaCount
-- nginx.service.type
+- artifactory-ha.serviceAccount.name
+- artifactory-ha.postgresql.postgresPassword
+- artifactory-ha.artifactory.masterKey
+- artifactory-ha.artifactory.node.replicaCount
+- artifactory-ha.artifactory.image.repository
+- artifactory-ha.nginx.service.type
+- artifactory-ha.nginx.image.repository
