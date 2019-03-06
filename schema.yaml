@@ -1,0 +1,49 @@
+applicationApiVersion: v1beta1
+
+properties:
+  name:
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:
+    type: string
+    x-google-marketplace:
+      type: NAMESPACE
+  serviceAccount.name:
+    type: string
+    x-google-marketplace:
+      type: SERVICE_ACCOUNT
+  postgresql.postgresPassword:
+    type: string
+    x-google-marketplace:
+      type: GENERATED_PASSWORD
+      generatedPassword:
+        length: 16
+        includeSymbols: False  # Default is False
+        base64: True           # Default is True
+  artifactory.masterKey:
+    title: 'Artifactory requires a unique master key'
+    description: 'You can generate one with the command: openssl rand -hex 32'
+    default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+    type: string
+  artifactory.node.replicaCount:
+    type: integer
+    title: 'Artifactory Member Node count'
+    description: 'Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)'
+    default: 2
+    minimum: 1
+    maximum: 10
+  nginx.service.type:
+    title: 'Nginx Service Type'
+    description: 'Nginx Service Type'
+    default: 'LoadBalancer'
+    type: string
+
+required:
+- name
+- namespace
+- serviceAccount.name
+- postgresql.postgresPassword
+- artifactory.masterKey
+- artifactory.node.replicaCount
+- nginx.service.type
