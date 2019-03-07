@@ -18,6 +18,11 @@ spec:
     maintainers:
     - name: JFrog
       url: https://www.jfrog.com/
+    keywords:
+    - artifactory
+    - jfrog
+    - devops
+    - repository
     links:
     - description: 'User Guide: JFrog'
       url: https://www.jfrog.com/confluence/
