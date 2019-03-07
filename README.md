@@ -1,7 +1,5 @@
 # JFrog Artifactory HA for GKE Marketplace
 
-# Install the artifacotry-ha application
-
 ## <a name="using-install-command-line"></a>Using the command line
 
 ### Prerequisites
@@ -88,7 +86,7 @@ You need to run this command once.
 #### Clone this repo
 
 ```shell
-git clone https://github.com/jfrog/jfrog-marketplace-gke.git
+git clone https://github.com/jfrog/gke-marketplace-jfrog.git
 ```
 
 #### Pull deployer image
