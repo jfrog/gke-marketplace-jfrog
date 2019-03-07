@@ -26,6 +26,34 @@ properties:
     description: 'You can generate one with the command: openssl rand -hex 32'
     default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
     type: string
+  artifactory-ha.artifactory.image.repository:
+    type: string
+    default: gcr.io/jfrog-gc-mp/jfrog/artifactory-pro
+    x-google-marketplace:
+      type: IMAGE
+  artifactory-ha.artifactory.persistence.storageClass:
+    title: Storage class for Artifactory nodes, SSD storage recommended.
+    type: string
+    x-google-marketplace:
+      type: STORAGE_CLASS
+      storageClass:
+        type: SSD
+  artifactory-ha.artifactory.persistence.size:
+    title: Disk allocation to Artifactory nodes
+    type: string
+    default: "200Gi"
+  artifactory-ha.artifactory.primary.resources.requests.cpu:
+    title: CPU units for primary node
+    type: string
+    default: "100m"
+  artifactory-ha.artifactory.primary.resources.requests.memory:
+    title: Memory for primary node
+    type: string
+    default: "512M"
+  artifactory-ha.artifactory.primary.resources.limits.cpu:
+    title: CPU units for primary node (limit)
+    type: string
+    default: "8"
   artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: 'Artifactory Member Node count'
@@ -33,9 +61,29 @@ properties:
     default: 2
     minimum: 1
     maximum: 10
-  artifactory-ha.artifactory.image.repository:
+  artifactory-ha.artifactory.primary.resources.limits.memory:
+    title: Memory for primary node (limit)
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog/artifactory-pro
+    default: "512G"
+  artifactory-ha.artifactory.node.resources.requests.cpu:
+    title: CPU units per node
+    type: string
+    default: "100m"
+  artifactory-ha.artifactory.node.resources.requests.memory:
+    title: Memory per node
+    type: string
+    default: "512M"
+  artifactory-ha.artifactory.node.resources.limits.cpu:
+    title: CPU units per node (limit)
+    type: string
+    default: "8"
+  artifactory-ha.artifactory.node.resources.limits.memory:
+    title: Memory per node (limit)
+    type: string
+    default: "512G"
+  artifactory-ha.nginx.image.repository:
+    type: string
+    default: gcr.io/jfrog-gc-mp/jfrog/nginx-artifactory-pro
     x-google-marketplace:
       type: IMAGE
   artifactory-ha.nginx.service.type:
@@ -43,12 +91,6 @@ properties:
     description: 'Nginx Service Type'
     default: 'LoadBalancer'
     type: string
-  artifactory-ha.nginx.image.repository:
-    type: string
-    default: gcr.io/jfrog-gc-mp/jfrog/nginx-artifactory-pro
-    x-google-marketplace:
-      type: IMAGE
-
 required:
 - name
 - namespace
@@ -57,5 +99,15 @@ required:
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
 - artifactory-ha.artifactory.image.repository
-- artifactory-ha.nginx.service.type
+- artifactory-ha.artifactory.persistence.storageClass
+- artifactory-ha.artifactory.persistence.size
+- artifactory-ha.artifactory.primary.resources.requests.cpu
+- artifactory-ha.artifactory.primary.resources.requests.memory
+- artifactory-ha.artifactory.primary.resources.limits.cpu
+- artifactory-ha.artifactory.primary.resources.limits.memory
+- artifactory-ha.artifactory.node.resources.requests.cpu
+- artifactory-ha.artifactory.node.resources.requests.memory
+- artifactory-ha.artifactory.node.resources.limits.cpu
+- artifactory-ha.artifactory.node.resources.limits.memory
 - artifactory-ha.nginx.image.repository
+- artifactory-ha.nginx.service.type
