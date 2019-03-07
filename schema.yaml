@@ -21,6 +21,13 @@ properties:
         length: 16
         includeSymbols: False  # Default is False
         base64: True           # Default is True
+  artifactory-ha.postgresql.persistence.storageClass:
+    title: Storage class for Postgress, SSD storage recommended.
+    type: string
+    x-google-marketplace:
+      type: STORAGE_CLASS
+      storageClass:
+        type: SSD
   artifactory-ha.artifactory.masterKey:
     title: 'Artifactory requires a unique master key'
     description: 'You can generate one with the command: openssl rand -hex 32'
@@ -96,6 +103,7 @@ required:
 - namespace
 - artifactory-ha.serviceAccount.name
 - artifactory-ha.postgresql.postgresPassword
+- artifactory-ha.postgresql.persistence.storageClass
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
 - artifactory-ha.artifactory.image.repository
