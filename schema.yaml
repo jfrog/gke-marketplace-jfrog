@@ -35,7 +35,7 @@ properties:
     type: string
   artifactory-ha.artifactory.image.repository:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog/artifactory-pro
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory
     x-google-marketplace:
       type: IMAGE
 #  artifactory-ha.artifactory.persistence.storageClass:
@@ -90,7 +90,7 @@ properties:
     default: "512G"
   artifactory-ha.nginx.image.repository:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog/nginx-artifactory-pro
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
     x-google-marketplace:
       type: IMAGE
   artifactory-ha.nginx.service.type:
