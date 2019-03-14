@@ -33,11 +33,16 @@ properties:
     description: 'You can generate one with the command: openssl rand -hex 32'
     default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
     type: string
-  artifactory-ha.artifactory.image.repository:
+  artifactoryImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:6.8.4
     x-google-marketplace:
       type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: artifactory-ha.artifactory.image.repository
+            after: artifactory-ha.artifactory.image.version
 #  artifactory-ha.artifactory.persistence.storageClass:
 #    title: Storage class for Artifactory nodes, SSD storage recommended.
 #    type: string
@@ -88,11 +93,16 @@ properties:
     title: Memory per node (limit)
     type: string
     default: "512G"
-  artifactory-ha.nginx.image.repository:
+  artifactoryNginxImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.8.4
     x-google-marketplace:
       type: IMAGE
+      image:
+        generatedProperties:
+          splitByColon:
+            before: artifactory-ha.nginx.image.repository
+            after: artifactory-ha.nginx.image.version
   artifactory-ha.nginx.service.type:
     title: 'Nginx Service Type'
     description: 'Nginx Service Type'
@@ -110,7 +120,7 @@ required:
 #- artifactory-ha.postgresql.persistence.storageClass
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
-- artifactory-ha.artifactory.image.repository
+- artifactoryImage
 #- artifactory-ha.artifactory.persistence.storageClass
 - artifactory-ha.artifactory.persistence.size
 - artifactory-ha.artifactory.primary.resources.requests.cpu
@@ -121,5 +131,5 @@ required:
 - artifactory-ha.artifactory.node.resources.requests.memory
 - artifactory-ha.artifactory.node.resources.limits.cpu
 - artifactory-ha.artifactory.node.resources.limits.memory
-- artifactory-ha.nginx.image.repository
+- artifactoryNginxImage
 - artifactory-ha.nginx.service.type
