@@ -108,6 +108,10 @@ properties:
     description: 'Nginx Service Type'
     default: 'LoadBalancer'
     type: string
+  artifactory-ha.nginx.service.loadBalancerIP:
+    title: 'Provide static ip address'
+    description: 'Provide static ip address for LoadBalancer'
+    type: string
   artifactory-ha.nginx.tlsSecretName:
     title: 'Nginx SSL Secret name'
     description: 'The SSL secret that will be used by the Nginx pod'
