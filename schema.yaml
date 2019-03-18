@@ -15,7 +15,7 @@ properties:
       type: SERVICE_ACCOUNT
   postgresImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/postgres:9.6.11
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/postgres:9.6
     x-google-marketplace:
       type: IMAGE
       image:
