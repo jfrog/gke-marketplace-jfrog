@@ -45,7 +45,7 @@ properties:
     type: string
   artifactoryImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:6.7.2
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:6.9.0
     x-google-marketplace:
       type: IMAGE
       image:
@@ -105,7 +105,7 @@ properties:
     default: "512G"
   artifactoryNginxImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.7.2
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.9.0
     x-google-marketplace:
       type: IMAGE
       image:
