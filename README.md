@@ -121,7 +121,7 @@ kubectl create namespace $NAMESPACE
 Run the install script
 
 ```shell
-./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:0.11.3   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
+./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:6.7   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
 
 ```
 
