@@ -1,5 +1,11 @@
 # JFrog Artifactory HA for GKE Marketplace
 
+JFrog Artifactory HA can be installed using either of the following approaches:
+
+* [Using the Google Cloud Platform Console](#using-install-platform-console)
+
+* [Using the command line](#using-install-command-line)
+
 ## <a name="using-install-command-line"></a>Using the command line
 
 ### Prerequisites
