@@ -92,7 +92,7 @@ properties:
   artifactory-ha.artifactory.javaOpts.other:
     title: The following Java options are passed to the java process running Artifactory.
     type: string
-    default: "\"-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC\""
+    default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
   artifactoryNginxImage:
     type: string
     default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.9.0
