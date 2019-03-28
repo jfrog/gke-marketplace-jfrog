@@ -1,5 +1,17 @@
 # JFrog Artifactory HA for GKE Marketplace
 
+JFrog Artifactory HA can be installed using either of the following approaches:
+
+* [Using the Google Cloud Platform Console](#using-install-platform-console)
+
+* [Using the command line](#using-install-command-line)
+
+## <a name="using-install-platform-console"></a>Using the Google Cloud Platform Marketplace
+
+Get up and running with a few clicks! Install this Prometheus app to a
+Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the
+[on-screen instructions](https://console.cloud.google.com/marketplace/details/jfrog/jfrog-gke).
+
 ## <a name="using-install-command-line"></a>Using the command line
 
 ### Prerequisites
