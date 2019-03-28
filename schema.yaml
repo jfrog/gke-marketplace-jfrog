@@ -31,13 +31,6 @@ properties:
         length: 16
         includeSymbols: False  # Default is False
         base64: True           # Default is True
-#  artifactory-ha.postgresql.persistence.storageClass:
-#    title: Storage class for Postgress, SSD storage recommended.
-#    type: string
-#    x-google-marketplace:
-#      type: STORAGE_CLASS
-#      storageClass:
-#        type: SSD
   artifactory-ha.artifactory.masterKey:
     title: 'Artifactory requires a unique master key'
     description: 'You can generate one with the command: openssl rand -hex 32'
@@ -53,13 +46,6 @@ properties:
           splitByColon:
             before: artifactory-ha.artifactory.image.repository
             after: artifactory-ha.artifactory.image.version
-#  artifactory-ha.artifactory.persistence.storageClass:
-#    title: Storage class for Artifactory nodes, SSD storage recommended.
-#    type: string
-#    x-google-marketplace:
-#      type: STORAGE_CLASS
-#      storageClass:
-#        type: SSD
   artifactory-ha.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
@@ -76,6 +62,10 @@ properties:
     title: CPU units for primary node (limit)
     type: string
     default: "8"
+  artifactory-ha.artifactory.primary.resources.limits.memory:
+    title: Memory for primary node (limit)
+    type: string
+    default: "8G"
   artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: 'Artifactory Member Node count'
@@ -83,10 +73,6 @@ properties:
     default: 2
     minimum: 1
     maximum: 10
-  artifactory-ha.artifactory.primary.resources.limits.memory:
-    title: Memory for primary node (limit)
-    type: string
-    default: "512G"
   artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
@@ -102,7 +88,11 @@ properties:
   artifactory-ha.artifactory.node.resources.limits.memory:
     title: Memory per node (limit)
     type: string
-    default: "512G"
+    default: "8G"
+  artifactory-ha.artifactory.javaOpts.other:
+    title: The following Java options are passed to the java process running Artifactory.
+    type: string
+    default: "\"-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC\""
   artifactoryNginxImage:
     type: string
     default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.9.0
@@ -115,12 +105,12 @@ properties:
             after: artifactory-ha.nginx.image.version
   artifactory-ha.nginx.service.type:
     title: 'Nginx Service Type'
-    description: 'Nginx Service Type'
+    description: 'Nginx Service Type. LoadBalancer/NodePort/ClusterIP'
     default: 'LoadBalancer'
     type: string
   artifactory-ha.nginx.service.loadBalancerIP:
     title: 'Provide static ip address'
-    description: 'Provide static ip address for LoadBalancer'
+    description: 'Provide static ip address for LoadBalancer. Optional for GKE.'
     type: string
   artifactory-ha.nginx.tlsSecretName:
     title: 'Nginx SSL Secret name'
@@ -132,11 +122,9 @@ required:
 - artifactory-ha.serviceAccount.name
 - postgresImage
 - artifactory-ha.postgresql.postgresPassword
-#- artifactory-ha.postgresql.persistence.storageClass
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
 - artifactoryImage
-#- artifactory-ha.artifactory.persistence.storageClass
 - artifactory-ha.artifactory.persistence.size
 - artifactory-ha.artifactory.primary.resources.requests.cpu
 - artifactory-ha.artifactory.primary.resources.requests.memory
@@ -146,5 +134,6 @@ required:
 - artifactory-ha.artifactory.node.resources.requests.memory
 - artifactory-ha.artifactory.node.resources.limits.cpu
 - artifactory-ha.artifactory.node.resources.limits.memory
+- artifactory-ha.artifactory.javaOpts.other
 - artifactoryNginxImage
 - artifactory-ha.nginx.service.type
