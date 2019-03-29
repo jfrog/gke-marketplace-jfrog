@@ -12,7 +12,7 @@ metadata:
 spec:
   descriptor:
     type: artifactory-ha
-    versions: '6.8.4'
+    versions: "{{ .Chart.AppVersion }}"
     description: |-
       Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
     maintainers:
@@ -23,6 +23,8 @@ spec:
     - jfrog
     - devops
     - repository
+    - registry
+    - kubernetes
     links:
     - description: 'User Guide: JFrog'
       url: https://www.jfrog.com/confluence/
@@ -30,7 +32,7 @@ spec:
       url: https://github.com/jfrog/charts
     notes: |-
       ## Congratulations. You have just deployed JFrog Artifactory HA!
-
+      ## Licenses are required.  If you need free trial licenses [click here](https://jfrog.com/artifactory/free-trial-onprem-google/#enterprise).
       ## DATABASE:
       To extract the database password, run the following
       ```shell
