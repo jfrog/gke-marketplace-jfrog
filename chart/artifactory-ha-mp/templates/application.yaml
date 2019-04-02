@@ -32,7 +32,9 @@ spec:
       url: https://github.com/jfrog/charts
     notes: |-
       ## Congratulations. You have just deployed JFrog Artifactory HA!
+
       ## Licenses are required.  If you need free trial licenses [click here](https://jfrog.com/artifactory/free-trial-onprem-google/#enterprise).
+
       ## DATABASE:
       To extract the database password, run the following
       ```shell
