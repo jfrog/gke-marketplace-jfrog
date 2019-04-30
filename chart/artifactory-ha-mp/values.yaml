@@ -1,3 +1,8 @@
+## Installer info
+installer:
+  type: helm
+  platform: gke-marketplace
+
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
 rbac:
