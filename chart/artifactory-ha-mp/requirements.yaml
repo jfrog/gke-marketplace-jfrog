@@ -1,4 +1,4 @@
 dependencies:
 - name: artifactory-ha
-  version: 0.16.7
-  repository: https://charts.jfrog.io
+  version: 0.100.8
+  repository: https://solengha.jfrog.io/solengha/artifactory-private-helm

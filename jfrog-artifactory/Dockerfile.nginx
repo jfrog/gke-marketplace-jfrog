@@ -1,4 +1,4 @@
-FROM docker.bintray.io/jfrog/nginx-artifactory-pro:6.12.2
+FROM gcr.io/soldev-dev/nginx-jfrog-artifactory:7.0.0-m187
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
