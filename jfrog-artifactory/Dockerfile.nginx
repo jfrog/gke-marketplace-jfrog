@@ -1,4 +1,4 @@
-FROM gcr.io/soldev-dev/nginx-jfrog-artifactory:7.0.0-m187
+FROM gcr.io/soldev-dev/nginx-artifactory-pro:7.x.feature.RTFACT.19960-87
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/

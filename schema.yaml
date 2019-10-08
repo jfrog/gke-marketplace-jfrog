@@ -36,9 +36,16 @@ properties:
     description: 'You can generate one with the command: openssl rand -hex 32'
     default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
     type: string
+# added to overwrite default values (replace bintray image) in values.yaml
+  artifactory.image.repository:
+    type: string
+    default: gcr.io/soldev-dev/artifactory-jcr:7.x.feature.RTFACT.19960-153
+      x-google-marketplace:
+        type: IMAGE
+#
   artifactoryImage:
     type: string
-    default: gcr.io/soldev-dev/jfrog-artifactory:7.0.0-m187
+    default: gcr.io/soldev-dev/artifactory-jcr:7.x.feature.RTFACT.19960-153
     x-google-marketplace:
       type: IMAGE
       image:
@@ -93,9 +100,16 @@ properties:
     title: The following Java options are passed to the java process running Artifactory.
     type: string
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
+# added to overwrite default values (replace bintray image) in values.yaml
+  nginx.image.repository:
+      type: string
+      default: gcr.io/soldev-dev/nginx-artifactory-pro:7.x.feature.RTFACT.19960-87
+        x-google-marketplace:
+          type: IMAGE
+#
   artifactoryNginxImage:
     type: string
-    default: gcr.io/soldev-dev/nginx-artifactory-pro:7.0.0-m187
+    default: gcr.io/soldev-dev/nginx-artifactory-pro:7.x.feature.RTFACT.19960-87
     x-google-marketplace:
       type: IMAGE
       image:
@@ -124,6 +138,7 @@ required:
 - artifactory-ha.postgresql.postgresPassword
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
+- artifactory.image.repository
 - artifactoryImage
 - artifactory-ha.artifactory.persistence.size
 - artifactory-ha.artifactory.primary.resources.requests.cpu
@@ -135,5 +150,6 @@ required:
 - artifactory-ha.artifactory.node.resources.limits.cpu
 - artifactory-ha.artifactory.node.resources.limits.memory
 - artifactory-ha.artifactory.javaOpts.other
+- nginx.image.repository
 - artifactoryNginxImage
 - artifactory-ha.nginx.service.type
