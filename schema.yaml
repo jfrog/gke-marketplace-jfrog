@@ -40,8 +40,8 @@ properties:
   artifactory.image.repository:
     type: string
     default: gcr.io/soldev-dev/artifactory-jcr:7.x.feature.RTFACT.19960-153
-      x-google-marketplace:
-        type: IMAGE
+    x-google-marketplace:
+      type: IMAGE
 #
   artifactoryImage:
     type: string
@@ -102,10 +102,10 @@ properties:
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
 # added to overwrite default values (replace bintray image) in values.yaml
   nginx.image.repository:
-      type: string
-      default: gcr.io/soldev-dev/nginx-artifactory-pro:7.x.feature.RTFACT.19960-87
-        x-google-marketplace:
-          type: IMAGE
+    type: string
+    default: gcr.io/soldev-dev/nginx-artifactory-pro:7.x.feature.RTFACT.19960-87
+    x-google-marketplace:
+      type: IMAGE
 #
   artifactoryNginxImage:
     type: string
