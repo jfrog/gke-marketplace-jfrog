@@ -1,4 +1,4 @@
-FROM gcr.io/soldev-dev/artifactory-jcr:7.x.feature.RTFACT.19960-153
+FROM gcr.io/soldev-dev/jfrog-artifactory:6.13.1
 
 
 ADD sources /third-party-oss/sources/
