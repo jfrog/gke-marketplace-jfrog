@@ -39,7 +39,7 @@ properties:
 #
   artifactoryImage:
     type: string
-    default: gcr.io/soldev-dev/jfrog-artifactory:6.13.1
+    default: gcr.io/soldev-dev/jfrog-artifactory/artifactory-jcr:6.x.feature.RTFACT.19960_for6-104
     x-google-marketplace:
       type: IMAGE
       image:
