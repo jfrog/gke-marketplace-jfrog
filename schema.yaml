@@ -103,8 +103,8 @@ properties:
       image:
         generatedProperties:
           splitByColon:
-            before: artifactory.nginx.image.repository
-            after: artifactory.nginx.image.version
+            before: artifactory.artifactory.nginx.image.repository
+            after: artifactory.artifactory.nginx.image.version
   artifactory.nginx.service.type:
     title: 'Nginx Service Type'
     description: 'Nginx Service Type. LoadBalancer/NodePort/ClusterIP'
