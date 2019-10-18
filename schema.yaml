@@ -45,8 +45,8 @@ properties:
       image:
         generatedProperties:
           splitByColon:
-            before: artifactory.artifactory.artifactory.image.repository
-            after: artifactory.artifactory.artifactory.image.version
+            before: jfrog-container-registry.artifactory.artifactory.image.repository
+            after: jfrog-container-registry.artifactory.artifactory.image.version
   artifactory.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
@@ -103,8 +103,8 @@ properties:
       image:
         generatedProperties:
           splitByColon:
-            before: artifactory.artifactory.nginx.image.repository
-            after: artifactory.artifactory.nginx.image.version
+            before: jfrog-container-registry.artifactory.nginx.image.repository
+            after: jfrog-container-registry.artifactory.nginx.image.version
   artifactory.nginx.service.type:
     title: 'Nginx Service Type'
     description: 'Nginx Service Type. LoadBalancer/NodePort/ClusterIP'
