@@ -13,16 +13,16 @@ properties:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
-  postgresImage:
-    type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/postgres:9.6
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: artifactory-ha.postgresql.image
-            after: artifactory-ha.postgresql.imageTag
+  #postgresImage:
+  #  type: string
+  #  default: gcr.io/jfrog-gc-mp/jfrog-artifactory/postgres:9.6
+  #  x-google-marketplace:
+  #    type: IMAGE
+  #    image:
+  #      generatedProperties:
+  #        splitByColon:
+  #          before: artifactory-ha.postgresql.image
+  #          after: artifactory-ha.postgresql.imageTag
   artifactory-ha.postgresql.postgresPassword:
     type: string
     x-google-marketplace:
@@ -120,7 +120,7 @@ required:
 - name
 - namespace
 - artifactory-ha.serviceAccount.name
-- postgresImage
+#- postgresImage
 - artifactory-ha.postgresql.postgresPassword
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount

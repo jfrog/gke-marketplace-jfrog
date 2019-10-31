@@ -3,4 +3,4 @@ dependencies:
   repository: https://charts.jfrog.io
   version: 0.17.1
 digest: sha256:85f1dfd5b6d99b55abc6403dd928147b21cfb66eb37252ad3251dc60270495a4
-generated: "2019-10-29T14:38:16.749736-07:00"
+generated: "2019-10-31T10:45:13.71095-07:00"
