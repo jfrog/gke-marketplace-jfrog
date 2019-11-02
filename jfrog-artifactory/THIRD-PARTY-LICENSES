@@ -3864,6 +3864,13 @@ Spring LDAP
 Apache License - Version 2.0
 
 
+Spring Boot
+-------------------------------------NOTICE------------------------------------
+Spring Boot is Open Source software released under the Apache 2.0 license.
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
 Apache derby
 -------------------------------------NOTICE------------------------------------
 =========================================================================
@@ -9688,6 +9695,605 @@ Hamster.js v1.1.2
 License: MIT
 ------------------------------------LICENSE------------------------------------
 MIT License
+
+
+ClassMate
+-------------------------------------NOTICE------------------------------------
+Project is licensed under Apache 2.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+BTF
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2014, Francis Galiegue (fgaliegue@gmail.com)
+
+This software is dual-licensed under:
+
+- the Lesser General Public License (LGPL) version 3.0 or, at your option, any
+  later version;
+- the Apache Software License (ASL) version 2.0.
+
+The text of this file and of both licenses is available at the root of this
+project or, if you have the jar distribution, in directory META-INF/, under
+the names LGPL-3.0.txt and ASL-2.0.txt respectively.
+
+Direct link to the sources:
+
+- LGPL 3.0: https://www.gnu.org/licenses/lgpl-3.0.txt
+- ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+Jackson CoreUtils
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2014, Francis Galiegue (fgaliegue@gmail.com)
+
+This software is dual-licensed under:
+
+- the Lesser General Public License (LGPL) version 3.0 or, at your option, any
+  later version;
+- the Apache Software License (ASL) version 2.0.
+
+The text of this file and of both licenses is available at the root of this
+project or, if you have the jar distribution, in directory META-INF/, under
+the names LGPL-3.0.txt and ASL-2.0.txt respectively.
+
+Direct link to the sources:
+
+- LGPL 3.0: https://www.gnu.org/licenses/lgpl-3.0.txt
+- ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+JSON Patch
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2014, Francis Galiegue (fgaliegue@gmail.com)
+
+This software is dual-licensed under:
+
+- the Lesser General Public License (LGPL) version 3.0 or, at your option, any
+  later version;
+- the Apache Software License (ASL) version 2.0.
+
+The text of this file and of both licenses is available at the root of this
+project or, if you have the jar distribution, in directory META-INF/, under
+the names LGPL-3.0.txt and ASL-2.0.txt respectively.
+
+Direct link to the sources:
+
+- LGPL 3.0: https://www.gnu.org/licenses/lgpl-3.0.txt
+- ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+MSG Simple
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2014, Francis Galiegue (fgaliegue@gmail.com)
+
+This software is dual-licensed under:
+
+- the Lesser General Public License (LGPL) version 3.0 or, at your option, any
+  later version;
+- the Apache Software License (ASL) version 2.0.
+
+The text of this file and of both licenses is available at the root of this
+project or, if you have the jar distribution, in directory META-INF/, under
+the names LGPL-3.0.txt and ASL-2.0.txt respectively.
+
+Direct link to the sources:
+
+- LGPL 3.0: https://www.gnu.org/licenses/lgpl-3.0.txt
+- ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Proto Google Common Protos
+-------------------------------------NOTICE------------------------------------
+Copyright 2019 Google LLC.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+FindBugs JSR-305
+-------------------------------------NOTICE------------------------------------
+The JSR-305 reference implementation (lib/jsr305.jar) is
+distributed under the terms of the New BSD license:
+
+  http://www.opensource.org/licenses/bsd-license.php
+  
+See the JSR-305 home page for more information:
+
+  http://code.google.com/p/jsr-305/
+------------------------------------LICENSE------------------------------------
+BSD 3-Clause "New" or "Revised" License
+
+
+Error Prone
+-------------------------------------NOTICE------------------------------------
+Copyright 2014 The Error Prone Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Protocol Buffers
+-------------------------------------NOTICE------------------------------------
+Copyright 2008 Google Inc.  All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+    * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Code generated by the Protocol Buffer compiler is owned by the owner
+of the input file used when generating it.  This code is not
+standalone and requires a support library to be linked with it.  This
+support library is itself covered by the above license.
+------------------------------------LICENSE------------------------------------
+BSD 3-Clause "New" or "Revised" License
+
+
+JSON library from Android SDK
+-------------------------------------NOTICE------------------------------------
+Copyright (C) 2010 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+GRPC Java
+-------------------------------------NOTICE------------------------------------
+Copyright 2017 The gRPC Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Micrometer Application Metrics 
+-------------------------------------NOTICE------------------------------------
+Copyright 2017 Pivotal Software, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+OpenCensus
+-------------------------------------NOTICE------------------------------------
+Copyright 2018, OpenCensus Authors
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Reactor
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2011-2017 Pivotal Software Inc, All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Swagger Core
+-------------------------------------NOTICE------------------------------------
+Copyright 2018 SmartBear Software
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Swagger Parser
+-------------------------------------NOTICE------------------------------------
+Copyright 2018 SmartBear Software
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Bean Validation API
+-------------------------------------NOTICE------------------------------------
+Jakarta Bean Validation API
+
+License: Apache License, Version 2.0
+See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
+------------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Checker Qual
+-------------------------------------NOTICE------------------------------------
+The Checker Framework
+Copyright 2004-present by the Checker Framework developers
+
+
+Permission is hereby granted, free  of charge, to any person obtaining
+a  copy  of this  software  and  associated  documentation files  (the
+"Software"), to  deal in  the Software without  restriction, including
+without limitation  the rights to  use, copy, modify,  merge, publish,
+distribute,  sublicense, and/or sell  copies of  the Software,  and to
+permit persons to whom the Software  is furnished to do so, subject to
+the following conditions:
+
+The  above  copyright  notice  and  this permission  notice  shall  be
+included in all copies or substantial portions of the Software.
+
+THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+------------------------------------LICENSE------------------------------------
+MIT License
+
+
+Animal Sniffer Annotations
+-------------------------------------NOTICE------------------------------------
+Copyright (c) 2008 Kohsuke Kawaguchi and codehaus.org.
+
+
+Permission is hereby granted, free  of charge, to any person obtaining
+a  copy  of this  software  and  associated  documentation files  (the
+"Software"), to  deal in  the Software without  restriction, including
+without limitation  the rights to  use, copy, modify,  merge, publish,
+distribute,  sublicense, and/or sell  copies of  the Software,  and to
+permit persons to whom the Software  is furnished to do so, subject to
+the following conditions:
+
+The  above  copyright  notice  and  this permission  notice  shall  be
+included in all copies or substantial portions of the Software.
+
+THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+------------------------------------LICENSE------------------------------------
+MIT License
+
+
+Flyway Core
+-------------------------------------NOTICE------------------------------------
+Copyright (C) 2010-2019 Boxfuse GmbH
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-----------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+HdrHistogram
+-------------------------------------NOTICE------------------------------------
+The code in this repository code was Written by Gil Tene, Michael Barker,
+and Matt Warren, and released to the public domain, as explained at
+http://creativecommons.org/publicdomain/zero/1.0/
+
+For users of this code who wish to consume it under the "BSD" license
+rather than under the public domain or CC0 contribution text mentioned
+above, the code found under this directory is *also* provided under the
+following license (commonly referred to as the BSD 2-Clause License). This
+license does not detract from the above stated release of the code into
+the public domain, and simply represents an additional license granted by
+the Author.
+
+-----------------------------------------------------------------------------
+** Beginning of "BSD 2-Clause License" text. **
+
+ Copyright (c) 2012, 2013, 2014, 2015, 2016 Gil Tene
+ Copyright (c) 2014 Michael Barker
+ Copyright (c) 2014 Matt Warren
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ 1. Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+ THE POSSIBILITY OF SUCH DAMAGE.
+
+-----------------------------------LICENSE------------------------------------
+Public Domain
+
+
+Hibernate Validator Engine
+-------------------------------------NOTICE------------------------------------
+Hibernate Validator, declare and validate application constraints
+
+License: Apache License, Version 2.0
+See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
+
+-----------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+JBoss Logging
+-------------------------------------NOTICE------------------------------------
+JBoss, Home of Professional Open Source.
+
+Copyright 2010 Red Hat, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-----------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Jolokia
+-------------------------------------NOTICE------------------------------------
+Copyright 2009-2013 Roland Huss
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-----------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
+
+Latency Utils
+-------------------------------------NOTICE------------------------------------
+  
+  * This code was Written by Gil Tene of Azul Systems, and released to the
+  * public domain, as explained at http://creativecommons.org/publicdomain/zero/1.0/
+
+ For users of this code who wish to consume it under the "BSD" license
+ rather than under the public domain or CC0 contribution text mentioned
+ above, the code found under this directory is *also* provided under the
+ following license (commonly referred to as the BSD 2-Clause License). This
+ license does not detract from the above stated release of the code into
+ the public domain, and simply represents an additional license granted by
+ the Author.
+
+ -----------------------------------------------------------------------------
+ ** Beginning of "BSD 2-Clause License" text. **
+
+  Copyright (c) 2012, 2013, 2014 Gil Tene
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  1. Redistributions of source code must retain the above copyright notice,
+     this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright notice,
+     this list of conditions and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  THE POSSIBILITY OF SUCH DAMAGE.
+
+-----------------------------------LICENSE------------------------------------
+Public Domain
+
+
+Reactive Streams
+-------------------------------------NOTICE------------------------------------
+Licensed under Public Domain (CC0)
+
+To the extent possible under law, the person who associated CC0 with
+this code has waived all copyright and related or neighboring
+rights to this code.
+
+You should have received a copy of the CC0 legalcode along with this
+work. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+-----------------------------------LICENSE------------------------------------
+Public Domain
+
+
+JSON Assert
+-------------------------------------NOTICE------------------------------------
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-----------------------------------LICENSE------------------------------------
+Apache License - Version 2.0
+
 
 
 -------------------------------COMMON LICENSES---------------------------------
