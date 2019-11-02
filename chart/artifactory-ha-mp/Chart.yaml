@@ -1,8 +1,8 @@
 engine: gotpl
 name: artifactory-ha-mp
 home: https://www.jfrog.com/artifactory/
-version: 0.12.18
-appVersion: 6.9.1
+version: 0.17.1
+appVersion: 6.13.1
 description: Universal Repository Manager supporting all major packaging formats,
   build tools and CI servers.
 keywords:
@@ -13,8 +13,8 @@ sources:
 - https://bintray.com/jfrog/product/JFrog-Artifactory-Pro/view
 - https://github.com/jfrog/charts
 maintainers:
-- name: jainishshah17
-  email: jainishs@jfrog.com
+- name: danielmi
+  email: danielmi@jfrog.com
 - name: eldada
   email: eldada@jfrog.com
 - name: rimusz
