@@ -1,4 +1,4 @@
 dependencies:
-- name: jfrog-container-registry
-  version: 6.15.0-m003
-  repository: https://solengha.jfrog.io/solengha/artifactory-helm-private
+- name: artifactory-ha
+  version: 1.1.0
+  repository: https://charts.jfrog.io
