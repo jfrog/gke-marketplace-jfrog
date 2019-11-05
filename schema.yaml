@@ -38,7 +38,7 @@ properties:
     type: string
   artifactoryImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-jcr:6.15.0-m003
+    default: gcr.io/soldev-dev/jfrog-artifactory/artifactory-jcr:6.15.0-m003
     x-google-marketplace:
       type: IMAGE
       image:
