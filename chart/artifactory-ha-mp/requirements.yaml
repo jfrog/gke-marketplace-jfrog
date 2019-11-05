@@ -1,4 +1,4 @@
 dependencies:
-- name: artifactory
-  version: 8.1.0
+- name: artifactory-ha
+  version: 1.1.0
   repository: https://charts.jfrog.io
