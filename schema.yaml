@@ -95,7 +95,7 @@ properties:
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
   artifactoryNginxImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.14.0
+    default: gcr.io/soldev-dev/nginx-jfrog-artifactory:6.14.0
     x-google-marketplace:
       type: IMAGE
       image:
@@ -112,7 +112,7 @@ properties:
     title: 'Provide static ip address'
     description: 'Provide static ip address for LoadBalancer. Optional for GKE.'
     type: string
-  artifactory.nginx.tlsSecretName:
+  artifactory-ha.nginx.tlsSecretName:
     title: 'Nginx SSL Secret name'
     description: 'The SSL secret that will be used by the Nginx pod'
     type: string
@@ -136,4 +136,4 @@ required:
 - artifactory-ha.artifactory.node.resources.limits.memory
 - artifactory-ha.artifactory.javaOpts.other
 - artifactoryNginxImage
-- artifactory.nginx.service.type
+- artifactory-ha.nginx.service.type
