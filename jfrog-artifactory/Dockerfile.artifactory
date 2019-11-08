@@ -1,4 +1,4 @@
-FROM gcr.io/soldev-dev/jfrog-artifactory/artifactory-jcr:6.15.0-m003
+FROM gcr.io/jfrog-gc-mp/jfrog-jcr:6.15.0-m003
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
