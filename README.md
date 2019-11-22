@@ -1,6 +1,6 @@
-# JFrog Artifactory HA for GKE Marketplace
+# JFrog Container Registry for GKE Marketplace
 
-JFrog Artifactory HA can be installed using either of the following approaches:
+JFrog Container Registry can be installed using either of the following approaches:
 
 * [Using the Google Cloud Platform Console](#using-install-platform-console)
 
@@ -8,9 +8,9 @@ JFrog Artifactory HA can be installed using either of the following approaches:
 
 ## <a name="using-install-platform-console"></a>Using the Google Cloud Platform Marketplace
 
-Get up and running with a few clicks! Install this Prometheus app to a
+Get up and running with a few clicks! Install the JFrog Container Registry app to a
 Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the
-[on-screen instructions](https://console.cloud.google.com/marketplace/details/jfrog/jfrog-gke).
+[on-screen instructions](https://console.cloud.google.com/marketplace/details/jfrog/jfrogcr).
 
 ## <a name="using-install-command-line"></a>Using the command line
 
@@ -31,7 +31,7 @@ Configure `gcloud` as a Docker credential helper:
 gcloud auth configure-docker
 ```
 
-You can install artifactory-ha in an existing GKE cluster or create a new GKE cluster. 
+You can install the JFrog Container Registry in an existing GKE cluster or create a new GKE cluster. 
 
 * If you want to **create** a new Google GKE cluster, follow the instructions from the section [Create a GKE cluster](#create-gke-cluster) onwards.
 
@@ -39,13 +39,13 @@ You can install artifactory-ha in an existing GKE cluster or create a new GKE cl
 
 #### <a name="create-gke-cluster"></a>Create a GKE cluster
 
-Artifactory-ha requires a minimum 3 node cluster with each node having a minimum of 4 vCPU and k8s version 1.9. Available machine types can be seen [here](https://cloud.google.com/compute/docs/machine-types).
+The JFrog Container Registry requires a minimum 2 node cluster with each node having a minimum of 4 vCPU and k8s version 1.9. Available machine types can be seen [here](https://cloud.google.com/compute/docs/machine-types).
 
 Create a new cluster from the command line:
 
 ```shell
 # set the name of the Kubernetes cluster
-export CLUSTER=artifactory-ha-cluster
+export CLUSTER=jfrog-container-registry
 
 # set the zone to launch the cluster
 export ZONE=us-west1-a
@@ -99,6 +99,7 @@ You need to run this command once.
 
 ```shell
 git clone https://github.com/jfrog/gke-marketplace-jfrog.git
+git checkout 6.15.0
 ```
 
 #### Pull deployer image
@@ -110,7 +111,7 @@ gcloud auth configure-docker
 
 Pull the deployer image to your local docker registry
 ```shell
-docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:6.9
+docker pull gcr.io/cloud-marketplace/jfrog/jfrogcr:6.15.0
 ```
 
 #### Run installer script
@@ -118,7 +119,7 @@ Set your application instance name and the Kubernetes namespace to deploy:
 
 ```shell
 # set the application instance name
-export APP_INSTANCE_NAME=artifactory-ha
+export APP_INSTANCE_NAME=jfrog-container-registry
 
 # set the Kubernetes namespace the application was originally installed
 export NAMESPACE=<namespace>
@@ -133,7 +134,7 @@ kubectl create namespace $NAMESPACE
 Run the install script
 
 ```shell
-./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:6.9   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
+./scripts/mpdev scripts/install  --deployer=gcr.io/cloud-marketplace/jfrog/jfrogcr:6.15.0   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
 
 ```
 
@@ -145,7 +146,7 @@ kubectl get pods -n $NAMESPACE --watch
 
 # Delete the Application
 
-There are two approaches to deleting the Artifactory-ha
+There are two approaches to deleting the JFrog Container Registry
 
 * [Using the Google Cloud Platform Console](#using-platform-console)
 
@@ -156,7 +157,7 @@ There are two approaches to deleting the Artifactory-ha
 
 1. In the GCP Console, open [Kubernetes Applications](https://console.cloud.google.com/kubernetes/application).
 
-1. From the list of applications, click **artifactory-ha**.
+1. From the list of applications, click **jfrog-container-registry**.
 
 1. On the Application Details page, click **Delete**.
 
@@ -166,7 +167,7 @@ Set your application instance name and the Kubernetes namespace used to deploy:
 
 ```shell
 # set the application instance name
-export APP_INSTANCE_NAME=artifactory-ha
+export APP_INSTANCE_NAME=jfrog-container-registry
 
 # set the Kubernetes namespace the application was originally installed
 export NAMESPACE=<namespace>
@@ -214,7 +215,7 @@ delete the cluster using this command:
 ```shell
 
 # replace with the cluster name that you used
-export CLUSTER=artifactory-ha-cluster
+export CLUSTER=jfrog-container-registry
 
 # replace with the zone that you used
 export ZONE=us-west1-a
