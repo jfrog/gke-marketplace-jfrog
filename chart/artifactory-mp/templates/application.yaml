@@ -32,15 +32,18 @@ spec:
         url: https://github.com/jfrog/charts
     notes: |-
       ## Congratulations. You have just deployed your very own JFrog Container Registry!
+
       ## DATABASE:
       To extract the database password, run the following
       ```shell
       export DB_PASSWORD=$(kubectl get --namespace {{ .Release.Namespace }} $(kubectl get secret --namespace {{ .Release.Namespace }} -o name | grep postgresql) -o jsonpath="{.data.postgres-password}" | base64 --decode)
       echo ${DB_PASSWORD}
       ```
+
       ## SETUP:
       1. Get the JFrog Container Registry IP and URL
          NOTE: It may take a few minutes for the LoadBalancer public IP to be available!
+
          You can watch the status of the service by running `kubectl get svc -w {{ .Release.Name }}-nginx --namespace {{ .Release.Namespace }}`
          ```shell
          export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ .Release.Name }}-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
