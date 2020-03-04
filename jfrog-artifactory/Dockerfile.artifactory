@@ -1,5 +1,14 @@
-FROM gcr.io/jfrog-gc-mp/jfrog-artifactory:7.0.0-m664
+FROM docker.bintray.io/jfrog/artifactory-pro:7.2.1
+
+
+USER root
+RUN mkdir -p /opt/jfrog/artifactory/etc/info/
+ADD sources /opt/jfrog/artifactory/etc/info/
+RUN chown -R artifactory:artifactory /opt/jfrog/artifactory/etc
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.artifactory /docker/artifactory-pro/Dockerfile.GKE
+
+USER artifactory
+RUN ls -l /opt/jfrog/artifactory/etc/info
