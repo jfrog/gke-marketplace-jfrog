@@ -1,14 +1,12 @@
 FROM docker.bintray.io/jfrog/artifactory-pro:7.2.1
 
-
 USER root
-RUN mkdir -p /opt/jfrog/artifactory/etc/info/
-ADD sources /opt/jfrog/artifactory/etc/info/
-RUN chown -R artifactory:artifactory /opt/jfrog/artifactory/etc
+RUN mkdir -p /var/opt/jfrog/artifactory/etc/artifactory/info/
+ADD info /var/opt/jfrog/artifactory/etc/artifactory/info/
+RUN chown -R artifactory:artifactory /var/opt/jfrog/artifactory/etc/artifactory/
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.artifactory /docker/artifactory-pro/Dockerfile.GKE
 
 USER artifactory
-RUN ls -l /opt/jfrog/artifactory/etc/info
