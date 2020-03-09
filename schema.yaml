@@ -28,7 +28,7 @@ properties:
     type: string
   artifactoryImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:7.2.1
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:$ARTIFACTORY_VERSION
     x-google-marketplace:
       type: IMAGE
       image:
@@ -85,7 +85,7 @@ properties:
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
   artifactoryNginxImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:7.2.1
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:$ARTIFACTORY_VERSION
     x-google-marketplace:
       type: IMAGE
       image:
