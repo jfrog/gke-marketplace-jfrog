@@ -1,5 +1,5 @@
 # Using Red Hat Nginx
-FROM registry.redhat.io/rhel8/nginx-116:$ARTIFACTORY_VERSION
+FROM registry.redhat.io/rhel8/nginx-116
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
