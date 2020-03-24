@@ -63,6 +63,10 @@ properties:
     default: 2
     minimum: 1
     maximum: 10
+  artifactory-ha.artifactory.primary.name:
+    title: The name of the primary node
+    type: string
+    default: "art-ha-primary"
   artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
