@@ -12,7 +12,7 @@ metadata:
 spec:
   descriptor:
     type: artifactory-ha
-    versions: "{{ .Chart.AppVersion }}"
+    version: "{{ .Chart.AppVersion }}"
     description: |-
       Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
     maintainers:
