@@ -47,7 +47,7 @@ properties:
   artifactory-ha.artifactory.primary.resources.requests.memory:
     title: Memory for primary node
     type: string
-    default: "512M"
+    default: "1024M"
   artifactory-ha.artifactory.primary.resources.limits.cpu:
     title: CPU units for primary node (limit)
     type: string
@@ -74,7 +74,7 @@ properties:
   artifactory-ha.artifactory.node.resources.requests.memory:
     title: Memory per node
     type: string
-    default: "512M"
+    default: "2048M"
   artifactory-ha.artifactory.node.resources.limits.cpu:
     title: CPU units per node (limit)
     type: string
