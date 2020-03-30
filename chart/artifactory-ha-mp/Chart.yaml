@@ -1,8 +1,8 @@
 engine: gotpl
 name: artifactory-ha-mp
 home: https://www.jfrog.com/artifactory/
-version: $ARTIFACTORY_CHART_VERSION
-appVersion: $ARTIFACTORY_VERSION
+version: 2.2.2
+appVersion: 7.3.2
 description: Universal Repository Manager supporting all major packaging formats,
   build tools and CI servers.
 keywords:
