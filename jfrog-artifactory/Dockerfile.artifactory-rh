@@ -1,4 +1,5 @@
-FROM docker.bintray.io/jfrog/artifactory-pro:7.2.1
+# Using Red Hat Artifactory image, uploaded to gcr.io
+FROM gcr.io/jfrog-gc-mp/jfrog-artifactory-rh-temp:$ARTIFACTORY_VERSION
 
 USER root
 RUN mkdir -p /var/opt/jfrog/artifactory/etc/artifactory/info/

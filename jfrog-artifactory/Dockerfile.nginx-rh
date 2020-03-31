@@ -1,4 +1,5 @@
-FROM docker.bintray.io/jfrog/nginx-artifactory-pro:7.2.1
+# Using Red Hat Nginx
+FROM registry.redhat.io/rhel8/nginx-116
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/

@@ -4,24 +4,12 @@ set -eo pipefail
 
 # KUBE_CONFIG can point to a kubeconfig file or
 # the standard kubectl config directory.
-KUBE_CONFIG=${KUBE_CONFIG:-$HOME/.kube/config}
-GCLOUD_CONFIG=${GCLOUD_CONFIG:-$HOME/.config/gcloud}
 EXTRA_DOCKER_PARAMS=${EXTRA_DOCKER_PARAMS:-}
 MARKETPLACE_TOOLS_TAG=${MARKETPLACE_TOOLS_TAG:-latest}
 MARKETPLACE_TOOLS_IMAGE=${MARKETPLACE_TOOLS_IMAGE:-gcr.io/cloud-marketplace-tools/k8s/dev}
 
-kube_mount=""
-if [[ -f "${KUBE_CONFIG}" ]]; then
-  # Mount as a file.
-  kube_mount=(-v "${KUBE_CONFIG}:/mount/config/.kube/config:ro")
-elif [[ -d "${KUBE_CONFIG}" ]]; then
-  # Mount as a directory.
-  kube_mount=(-v "${KUBE_CONFIG}:/mount/config/.kube:ro")
-fi
-gcloud_mount=""
-if [[ -e "${GCLOUD_CONFIG}" ]]; then
-  gcloud_mount=(-v "${GCLOUD_CONFIG}:/mount/config/.config/gcloud:ro")
-fi
+kube_mount="-v ${HOST_KUBE_CONFIG}:/mount/config/.kube/config:ro"
+gcloud_mount="-v ${HOST_GCLOUD_CONFIG}:/mount/config/.config/gcloud:ro"
 
 docker run \
   -v "/var/run/docker.sock:/var/run/docker.sock:ro" \

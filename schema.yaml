@@ -13,7 +13,7 @@ properties:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
-  artifactory-ha.postgresql.postgresPassword:
+  artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:
       type: GENERATED_PASSWORD
@@ -22,13 +22,13 @@ properties:
         includeSymbols: False  # Default is False
         base64: True           # Default is True
   artifactory-ha.artifactory.masterKey:
-    title: 'Artifactory requires a unique master key'
-    description: 'You can generate one with the command: openssl rand -hex 32'
-    default: 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+    title: "Artifactory requires a unique master key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     type: string
   artifactoryImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:6.16.0
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:7.2.1
     x-google-marketplace:
       type: IMAGE
       image:
@@ -58,8 +58,8 @@ properties:
     default: "8G"
   artifactory-ha.artifactory.node.replicaCount:
     type: integer
-    title: 'Artifactory Member Node count'
-    description: 'Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)'
+    title: "Artifactory Member Node count"
+    description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
     default: 2
     minimum: 1
     maximum: 10
@@ -85,7 +85,7 @@ properties:
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
   artifactoryNginxImage:
     type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:6.16.0
+    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:7.2.1
     x-google-marketplace:
       type: IMAGE
       image:
@@ -94,23 +94,23 @@ properties:
             before: artifactory-ha.nginx.image.repository
             after: artifactory-ha.nginx.image.version
   artifactory-ha.nginx.service.type:
-    title: 'Nginx Service Type'
-    description: 'Nginx Service Type. LoadBalancer/NodePort/ClusterIP'
-    default: 'LoadBalancer'
+    title: "Nginx Service Type"
+    description: "Nginx Service Type. LoadBalancer/NodePort/ClusterIP"
+    default: "LoadBalancer"
     type: string
   artifactory-ha.nginx.service.loadBalancerIP:
-    title: 'Provide static ip address'
-    description: 'Provide static ip address for LoadBalancer. Optional for GKE.'
+    title: "Provide static ip address"
+    description: "Provide static ip address for LoadBalancer. Optional for GKE."
     type: string
   artifactory-ha.nginx.tlsSecretName:
-    title: 'Nginx SSL Secret name'
-    description: 'The SSL secret that will be used by the Nginx pod'
+    title: "Nginx SSL Secret name"
+    description: "The SSL secret that will be used by the Nginx pod"
     type: string
 required:
 - name
 - namespace
 - artifactory-ha.serviceAccount.name
-- artifactory-ha.postgresql.postgresPassword
+- artifactory-ha.postgresql.postgresqlPassword
 - artifactory-ha.artifactory.masterKey
 - artifactory-ha.artifactory.node.replicaCount
 - artifactoryImage
