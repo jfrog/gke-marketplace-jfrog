@@ -1,5 +1,52 @@
-applicationApiVersion: v1beta1
+x-google-marketplace:
+  schemaVersion: v2
+  # MUST match the version of the Application custom resource object.
+  # This is the same as the top level applicationApiVersion field in v1.
+  applicationApiVersion: v1beta1
+  # The release version is required in the schema and MUST match the
+  # release tag on the the deployer.
+  publishedVersion: '$ARTIFACTORY_VERSION'
+  publishedVersionMetadata:
+    releaseNote: >-
+      Initial release.
+    # releaseTypes list is optional.
+    # "Security" should only be used if this is an important update to patch
+    # an existing vulnerability, as such updates will display more prominently for users.
+    releaseTypes:
+      - Feature
+      - BugFix
+    # If "recommended" is "true", users using older releases are encouraged
+    # to update as soon as possible. This is useful if, for example, this release
+    # fixes a critical issue.
+    recommended: true
+  # Image declaration is required here. Refer to the Images section below.
+  images:
+    proxy:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
+        imageTag:
+          type: TAG
+          default: $ARTIFACTORY_VERSION
+    init:
+      properties:
+        imageInitFull:
+          type: FULL
+          default: gcr.io/jfrog-gc-mp/jfrog-artifactory:$ARTIFACTORY_VERSION
+        imageInitRegistry:
+          type: REGISTRY
+          default: gcr.io
+        imageInitRepo:
+          type: REPO_WITHOUT_REGISTRY
+          default: jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
+        imageInitTag:
+          type: TAG
+          default: $ARTIFACTORY_VERSION
 
+  # Other fields, like clusterConstraints, can be included here.
+
+# The Properties and Required sections of v2 are structured the same as those of v1.
 properties:
   name:
     type: string
@@ -26,16 +73,6 @@ properties:
     description: "You can generate one with the command: openssl rand -hex 32"
     default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     type: string
-  artifactoryImage:
-    type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory:$ARTIFACTORY_VERSION
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: artifactory-ha.artifactory.image.repository
-            after: artifactory-ha.artifactory.image.version
   artifactory-ha.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
@@ -87,16 +124,6 @@ properties:
     title: The following Java options are passed to the java process running Artifactory.
     type: string
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
-  artifactoryNginxImage:
-    type: string
-    default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro:$ARTIFACTORY_VERSION
-    x-google-marketplace:
-      type: IMAGE
-      image:
-        generatedProperties:
-          splitByColon:
-            before: artifactory-ha.nginx.image.repository
-            after: artifactory-ha.nginx.image.version
   artifactory-ha.nginx.service.type:
     title: "Nginx Service Type"
     description: "Nginx Service Type. LoadBalancer/NodePort/ClusterIP"
@@ -111,22 +138,20 @@ properties:
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
 required:
-- name
-- namespace
-- artifactory-ha.serviceAccount.name
-- artifactory-ha.postgresql.postgresqlPassword
-- artifactory-ha.artifactory.masterKey
-- artifactory-ha.artifactory.node.replicaCount
-- artifactoryImage
-- artifactory-ha.artifactory.persistence.size
-- artifactory-ha.artifactory.primary.resources.requests.cpu
-- artifactory-ha.artifactory.primary.resources.requests.memory
-- artifactory-ha.artifactory.primary.resources.limits.cpu
-- artifactory-ha.artifactory.primary.resources.limits.memory
-- artifactory-ha.artifactory.node.resources.requests.cpu
-- artifactory-ha.artifactory.node.resources.requests.memory
-- artifactory-ha.artifactory.node.resources.limits.cpu
-- artifactory-ha.artifactory.node.resources.limits.memory
-- artifactory-ha.artifactory.javaOpts.other
-- artifactoryNginxImage
-- artifactory-ha.nginx.service.type
+  - name
+  - namespace
+  - artifactory-ha.serviceAccount.name
+  - artifactory-ha.postgresql.postgresqlPassword
+  - artifactory-ha.artifactory.masterKey
+  - artifactory-ha.artifactory.node.replicaCount
+  - artifactory-ha.artifactory.persistence.size
+  - artifactory-ha.artifactory.primary.resources.requests.cpu
+  - artifactory-ha.artifactory.primary.resources.requests.memory
+  - artifactory-ha.artifactory.primary.resources.limits.cpu
+  - artifactory-ha.artifactory.primary.resources.limits.memory
+  - artifactory-ha.artifactory.node.resources.requests.cpu
+  - artifactory-ha.artifactory.node.resources.requests.memory
+  - artifactory-ha.artifactory.node.resources.limits.cpu
+  - artifactory-ha.artifactory.node.resources.limits.memory
+  - artifactory-ha.artifactory.javaOpts.other
+  - artifactory-ha.nginx.service.type
