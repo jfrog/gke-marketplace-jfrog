@@ -21,7 +21,7 @@ x-google-marketplace:
     recommended: true
   # Image declaration is required here. Refer to the Images section below.
   images:
-    proxy:
+    nginx-artifactory-pro:
       properties:
         imageRepo:
           type: REPO_WITH_REGISTRY
