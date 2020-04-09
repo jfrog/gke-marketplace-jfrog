@@ -21,7 +21,7 @@ x-google-marketplace:
     recommended: true
   # Image declaration is required here. Refer to the Images section below.
   images:
-    nginx-artifactory-pro:
+    proxy:
       properties:
         imageRepo:
           type: REPO_WITH_REGISTRY
@@ -29,7 +29,7 @@ x-google-marketplace:
         imageTag:
           type: TAG
           default: $ARTIFACTORY_VERSION
-    jfrog-artifactory:
+    init:
       properties:
         imageInitFull:
           type: FULL
