@@ -29,7 +29,7 @@ x-google-marketplace:
         imageTag:
           type: TAG
           default: $ARTIFACTORY_VERSION
-    init:
+    jfrog-artifactory:
       properties:
         imageInitFull:
           type: FULL
@@ -39,7 +39,7 @@ x-google-marketplace:
           default: gcr.io
         imageInitRepo:
           type: REPO_WITHOUT_REGISTRY
-          default: jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
+          default: jfrog-gc-mp/jfrog-artifactory
         imageInitTag:
           type: TAG
           default: $ARTIFACTORY_VERSION
