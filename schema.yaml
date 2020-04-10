@@ -5,6 +5,7 @@ x-google-marketplace:
   applicationApiVersion: v1beta1
   # The release version is required in the schema and MUST match the
   # release tag on the the deployer.
+  # This version will be used as an image tag for Artifactory and Nginx images
   publishedVersion: '$ARTIFACTORY_VERSION'
   publishedVersionMetadata:
     releaseNote: >-
@@ -21,31 +22,20 @@ x-google-marketplace:
     recommended: true
   # Image declaration is required here. Refer to the Images section below.
   images:
-    proxy:
+    '':  # Primary image has no name.
       properties:
-        imageRepo:
+        artifactory-ha.artifactory.image.repository:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/jfrog-gc-mp/jfrog-artifactory/nginx-artifactory-pro
-        imageTag:
+        artifactory-ha.artifactory.image.version:
           type: TAG
-          default: $ARTIFACTORY_VERSION
-    init:
+    nginx-artifactory-pro:
       properties:
-        imageInitFull:
-          type: FULL
-          default: gcr.io/jfrog-gc-mp/jfrog-artifactory:$ARTIFACTORY_VERSION
-        imageInitRegistry:
-          type: REGISTRY
-          default: gcr.io
-        imageInitRepo:
-          type: REPO_WITHOUT_REGISTRY
-          default: jfrog-gc-mp/jfrog-artifactory
-        imageInitTag:
+        artifactory-ha.nginx.image.repository:
+          type: REPO_WITH_REGISTRY
+        artifactory-ha.nginx.image.version:
           type: TAG
-          default: $ARTIFACTORY_VERSION
 
-  # Other fields, like clusterConstraints, can be included here.
-
+# Other fields, like clusterConstraints, can be included here.
 # The Properties and Required sections of v2 are structured the same as those of v1.
 properties:
   name:
@@ -100,10 +90,6 @@ properties:
     default: 2
     minimum: 1
     maximum: 10
-  artifactory-ha.artifactory.primary.name:
-    title: The name of the primary node
-    type: string
-    default: "art-ha-primary"
   artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
