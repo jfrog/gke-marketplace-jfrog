@@ -99,7 +99,7 @@ You need to run this command once.
 
 ```shell
 git clone https://github.com/jfrog/gke-marketplace-jfrog.git
-git checkout $ARTIFACTORY_VERSION
+git checkout 7.4.1
 ```
 
 #### Pull deployer image
@@ -111,7 +111,7 @@ gcloud auth configure-docker
 
 Pull the deployer image to your local docker registry
 ```shell
-docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:$DEPLOYER_TAG
+docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.4
 ```
 
 #### Run installer script
@@ -134,7 +134,7 @@ kubectl create namespace $NAMESPACE
 Run the install script
 
 ```shell
-./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:$DEPLOYER_TAG   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
+./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.4   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
 
 ```
 
