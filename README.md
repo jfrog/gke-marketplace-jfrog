@@ -135,7 +135,6 @@ Run the install script
 
 ```shell
 ./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.3   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
-
 ```
 
 Watch the deployment come up with
