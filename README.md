@@ -99,7 +99,7 @@ You need to run this command once.
 
 ```shell
 git clone https://github.com/jfrog/gke-marketplace-jfrog.git
-git checkout 7.4.1
+git checkout master
 ```
 
 #### Pull deployer image
@@ -135,7 +135,6 @@ Run the install script
 
 ```shell
 ./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.4   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
-
 ```
 
 Watch the deployment come up with
