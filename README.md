@@ -99,7 +99,6 @@ You need to run this command once.
 
 ```shell
 git clone https://github.com/jfrog/gke-marketplace-jfrog.git
-git checkout $ARTIFACTORY_VERSION
 ```
 
 #### Pull deployer image
