@@ -3,7 +3,9 @@ installer:
   type: helm
   platform: gke-marketplace
 
-installerInfo: "{'productId':'GKE_artifactory-ha/1.0.0','features':[{'featureId':'Partner/ACC-007222'}]}"
+artifactory-ha-mp:
+ artifactory-ha:
+  installerInfo: "{'productId':'GKE_artifactory-ha/1.0.0','features':[{'featureId':'Partner/ACC-007222'}]}"
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
