@@ -3,8 +3,7 @@ installer:
   type: helm
   platform: gke-marketplace
 
-artifactory-ha-mp:
- artifactory-ha:
+artifactory-ha:
   installerInfo: "{'productId':'GKE_artifactory-ha/1.0.0','features':[{'featureId':'Partner/ACC-007222'}]}"
 
 ## Role Based Access Control
