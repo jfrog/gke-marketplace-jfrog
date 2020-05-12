@@ -16,7 +16,7 @@ if [[ -f "${HOST_KUBE_CONFIG}" ]]; then
   kube_mount=(--mount "type=bind,source=/tmp/data/.kube/config,target=/mount/config/.kube/config,readonly")
 elif [[ -d "${HOST_KUBE_CONFIG}" ]]; then
   # Mount as a directory.
-  kube_mount=(--mount "type=bind,source=${HOST_KUBE_CONFIG},target=/mount/config/.kube,readonly")
+  kube_mount=(--mount "type=bind,source=/tmp/data/.kube/,target=/mount/config/.kube,readonly")
 fi
 
 gcloud_mount=""
