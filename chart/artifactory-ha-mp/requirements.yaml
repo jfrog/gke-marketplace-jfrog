@@ -1,4 +1,4 @@
 dependencies:
-- name: artifactory-ha
+- name: unified
   version: $UNIFIED_CHART_VERSION
   repository: https://partnership.jfrog.io/artifactory/artifactory-xray
