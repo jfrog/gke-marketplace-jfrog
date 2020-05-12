@@ -65,7 +65,7 @@ x-google-marketplace:
         unified.xray.persist.image.version:
           type: TAG
 
-
+# ------------------------------------------------------------
 # Other fields, like clusterConstraints, can be included here.
 # The Properties and Required sections of v2 are structured the same as those of v1.
 properties:
