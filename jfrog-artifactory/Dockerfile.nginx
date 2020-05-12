@@ -1,5 +1,6 @@
-FROM docker.bintray.io/jfrog/nginx-artifactory-pro:7.4.1
+FROM docker.bintray.io/jfrog/nginx-artifactory-pro:$UNIFIED_VERSION
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.nginx /docker/artifactory-pro/Dockerfile.GKE
+

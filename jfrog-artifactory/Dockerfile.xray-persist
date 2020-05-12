@@ -1,0 +1,2 @@
+FROM docker.bintray.io/jfrog/xray-persist:$XRAY_PERSIST_LATEST_VERSION
+

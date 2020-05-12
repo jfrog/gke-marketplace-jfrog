@@ -6,7 +6,7 @@ x-google-marketplace:
   # The release version is required in the schema and MUST match the
   # release tag on the the deployer.
   # This version will be used as an image tag for Artifactory and Nginx images
-  publishedVersion: '7.4.1'
+  publishedVersion: $UNIFIED_LATEST_VERSION
   publishedVersionMetadata:
     releaseNote: >-
       Initial release.
@@ -22,18 +22,49 @@ x-google-marketplace:
     recommended: true
   # Image declaration is required here. Refer to the Images section below.
   images:
-    '':  # Primary image has no name.
+    '':
       properties:
-        artifactory-ha.artifactory.image.repository:
+        unified.artifactory-ha.artifactory.image.repository:
           type: REPO_WITH_REGISTRY
-        artifactory-ha.artifactory.image.version:
+        unified.artifactory-ha.artifactory.image.version:
           type: TAG
     nginx-artifactory-pro:
       properties:
-        artifactory-ha.nginx.image.repository:
+        unified.artifactory-ha.nginx.image.repository:
           type: REPO_WITH_REGISTRY
-        artifactory-ha.nginx.image.version:
+        unified.artifactory-ha.nginx.image.version:
           type: TAG
+    router:
+      properties:
+        unified.xray.router.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.xray.router.image.version:
+          type: TAG
+    xray-server:
+      properties:
+        unified.xray.server.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.xray.server.image.version:
+          type: TAG
+    xray-analysis:
+      properties:
+        unified.xray.analysis.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.xray.analysis.image.version:
+          type: TAG
+    xray-indexer:
+      properties:
+        unified.xray.indexer.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.xray.indexer.image.version:
+          type: TAG
+    xray-persist:
+      properties:
+        unified.xray.persist.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.xray.persist.image.version:
+          type: TAG
+
 
 # Other fields, like clusterConstraints, can be included here.
 # The Properties and Required sections of v2 are structured the same as those of v1.
@@ -46,11 +77,11 @@ properties:
     type: string
     x-google-marketplace:
       type: NAMESPACE
-  artifactory-ha.serviceAccount.name:
+  unified.artifactory-ha.serviceAccount.name:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
-  artifactory-ha.postgresql.postgresqlPassword:
+  unified.artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:
       type: GENERATED_PASSWORD
@@ -58,86 +89,109 @@ properties:
         length: 16
         includeSymbols: False  # Default is False
         base64: True           # Default is True
-  artifactory-ha.artifactory.masterKey:
+  unified.artifactory-ha.artifactory.masterKey:
     title: "Artifactory requires a unique master key"
     description: "You can generate one with the command: openssl rand -hex 32"
     default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     type: string
-  artifactory-ha.artifactory.persistence.size:
+  unified.artifactory-ha.artifactory.joinKey:
+    title: "Artifactory requires a unique join key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    type: string
+  unified.artifactory-ha.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
     default: "200Gi"
-  artifactory-ha.artifactory.primary.resources.requests.cpu:
+  unified.artifactory-ha.artifactory.primary.resources.requests.cpu:
     title: CPU units for primary node
     type: string
     default: "100m"
-  artifactory-ha.artifactory.primary.resources.requests.memory:
+  unified.artifactory-ha.artifactory.primary.resources.requests.memory:
     title: Memory for primary node
     type: string
     default: "1024M"
-  artifactory-ha.artifactory.primary.resources.limits.cpu:
+  unified.artifactory-ha.artifactory.primary.resources.limits.cpu:
     title: CPU units for primary node (limit)
     type: string
     default: "4"
-  artifactory-ha.artifactory.primary.resources.limits.memory:
+  unified.artifactory-ha.artifactory.primary.resources.limits.memory:
     title: Memory for primary node (limit)
     type: string
     default: "8G"
-  artifactory-ha.artifactory.node.replicaCount:
+  unified.artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: "Artifactory Member Node count"
     description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
     default: 2
     minimum: 1
     maximum: 10
-  artifactory-ha.artifactory.node.resources.requests.cpu:
+  unified.artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
     default: "100m"
-  artifactory-ha.artifactory.node.resources.requests.memory:
+  unified.artifactory-ha.artifactory.node.resources.requests.memory:
     title: Memory per node
     type: string
     default: "2048M"
-  artifactory-ha.artifactory.node.resources.limits.cpu:
+  unified.artifactory-ha.artifactory.node.resources.limits.cpu:
     title: CPU units per node (limit)
     type: string
     default: "4"
-  artifactory-ha.artifactory.node.resources.limits.memory:
+  unified.artifactory-ha.artifactory.node.resources.limits.memory:
     title: Memory per node (limit)
     type: string
     default: "8G"
-  artifactory-ha.artifactory.javaOpts.other:
+  unified.artifactory-ha.artifactory.javaOpts.other:
     title: The following Java options are passed to the java process running Artifactory.
     type: string
     default: "-server -Xms1g -Xmx6g -Xss256k -XX:+UseG1GC"
-  artifactory-ha.nginx.service.type:
+  unified.artifactory-ha.nginx.service.type:
     title: "Nginx Service Type"
     description: "Nginx Service Type. LoadBalancer/NodePort/ClusterIP"
     default: "LoadBalancer"
     type: string
-  artifactory-ha.nginx.service.loadBalancerIP:
+  unified.artifactory-ha.nginx.service.loadBalancerIP:
     title: "Provide static ip address"
     description: "Provide static ip address for LoadBalancer. Optional for GKE."
     type: string
-  artifactory-ha.nginx.tlsSecretName:
+  unified.artifactory-ha.nginx.tlsSecretName:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
+  unified.artifactory-ha.artifactory.license.secret:
+    title: "Nginx SSL Secret name"
+    description: "The SSL secret that will be used by the Nginx pod"
+    type: string
+  unified.artifactory-ha.artifactory.license.dataKey:
+    title: "Nginx SSL Secret name"
+    description: "The SSL secret that will be used by the Nginx pod"
+    type: string
+  unified.nginx.service.ssloffload:
+    title: "Nginx ssl offload"
+    description: "Description"
+    type: boolean
+    default: true
+  unified.xray.enabled:
+    title: "Toggle for xray"
+    description: "Description"
+    type: boolean
+    default: false
 required:
   - name
   - namespace
-  - artifactory-ha.serviceAccount.name
-  - artifactory-ha.postgresql.postgresqlPassword
-  - artifactory-ha.artifactory.masterKey
-  - artifactory-ha.artifactory.node.replicaCount
-  - artifactory-ha.artifactory.persistence.size
-  - artifactory-ha.artifactory.primary.resources.requests.cpu
-  - artifactory-ha.artifactory.primary.resources.requests.memory
-  - artifactory-ha.artifactory.primary.resources.limits.cpu
-  - artifactory-ha.artifactory.primary.resources.limits.memory
-  - artifactory-ha.artifactory.node.resources.requests.cpu
-  - artifactory-ha.artifactory.node.resources.requests.memory
-  - artifactory-ha.artifactory.node.resources.limits.cpu
-  - artifactory-ha.artifactory.node.resources.limits.memory
-  - artifactory-ha.artifactory.javaOpts.other
-  - artifactory-ha.nginx.service.type
+  - unified.artifactory-ha.serviceAccount.name
+  - unified.artifactory-ha.postgresql.postgresqlPassword
+  - unified.artifactory-ha.artifactory.masterKey
+  - unified.artifactory-ha.artifactory.node.replicaCount
+  - unified.artifactory-ha.artifactory.persistence.size
+  - unified.artifactory-ha.artifactory.primary.resources.requests.cpu
+  - unified.artifactory-ha.artifactory.primary.resources.requests.memory
+  - unified.artifactory-ha.artifactory.primary.resources.limits.cpu
+  - unified.artifactory-ha.artifactory.primary.resources.limits.memory
+  - unified.artifactory-ha.artifactory.node.resources.requests.cpu
+  - unified.artifactory-ha.artifactory.node.resources.requests.memory
+  - unified.artifactory-ha.artifactory.node.resources.limits.cpu
+  - unified.artifactory-ha.artifactory.node.resources.limits.memory
+  - unified.artifactory-ha.artifactory.javaOpts.other
+  - unified.artifactory-ha.nginx.service.type

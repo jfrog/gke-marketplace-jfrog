@@ -1,4 +1,4 @@
-FROM docker.bintray.io/jfrog/artifactory-pro:7.4.1
+FROM docker.bintray.io/jfrog/artifactory-pro:$UNIFIED_VERSION
 
 USER root
 RUN mkdir -p /var/opt/jfrog/artifactory/etc/artifactory/info/

@@ -1,0 +1,2 @@
+FROM docker.bintray.io/jfrog/xray-indexer:$XRAY_INDEXER_LATEST_VERSION
+
