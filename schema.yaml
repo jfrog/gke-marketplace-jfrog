@@ -167,6 +167,7 @@ properties:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
+    default: "artifactory.cluster.license"
   unified.nginx.service.ssloffload:
     title: "Nginx ssl offload"
     description: "Description"
