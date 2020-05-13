@@ -10,7 +10,6 @@ EXTRA_DOCKER_PARAMS=${EXTRA_DOCKER_PARAMS:-}
 MARKETPLACE_TOOLS_TAG=${MARKETPLACE_TOOLS_TAG:-latest}
 MARKETPLACE_TOOLS_IMAGE=${MARKETPLACE_TOOLS_IMAGE:-gcr.io/cloud-marketplace-tools/k8s/dev}
 
-
 kube_mount=""
 if [[ -f "${HOST_KUBE_CONFIG}" ]]; then
   # Mount as a file.
