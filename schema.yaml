@@ -195,4 +195,3 @@ required:
   - unified.artifactory-ha.artifactory.node.resources.limits.memory
   - unified.artifactory-ha.artifactory.javaOpts.other
   - unified.artifactory-ha.nginx.service.type
-  - unified.artifactory-ha.artifactory.license.secret
