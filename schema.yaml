@@ -28,6 +28,12 @@ x-google-marketplace:
           type: REPO_WITH_REGISTRY
         unified.artifactory-ha.artifactory.image.version:
           type: TAG
+    nginx-artifactory-pro:
+      properties:
+        unified.artifactory-ha.nginx.image.repository:
+          type: REPO_WITH_REGISTRY
+        unified.artifactory-ha.nginx.image.version:
+          type: TAG
     router:
       properties:
         unified.xray.router.image.repository:
