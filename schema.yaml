@@ -6,7 +6,7 @@ x-google-marketplace:
   # The release version is required in the schema and MUST match the
   # release tag on the the deployer.
   # This version will be used as an image tag for Artifactory and Nginx images
-  publishedVersion: '$ARTIFACTORY_VERSION'
+  publishedVersion: '7.4.3'
   publishedVersionMetadata:
     releaseNote: >-
       Initial release.
