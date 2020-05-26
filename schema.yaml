@@ -151,6 +151,11 @@ properties:
     description: "Nginx Service Type. LoadBalancer/NodePort/ClusterIP"
     default: "LoadBalancer"
     type: string
+  unified.artifactory-ha.nginx.service.ssloffload:
+    title: "Nginx SSL offload"
+    description: "Offload the SSL decryption processing from backend servers"
+    type: boolean
+    default: false
   unified.artifactory-ha.nginx.service.loadBalancerIP:
     title: "Provide static ip address"
     description: "Provide static ip address for LoadBalancer. Optional for GKE."
