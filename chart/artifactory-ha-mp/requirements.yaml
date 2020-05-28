@@ -1,4 +1,4 @@
 dependencies:
 - name: unified
   version: $UNIFIED_CHART_VERSION
-  repository: https://partnership.jfrog.io/artifactory/artifactory7-helm-charts
+  repository: https://partnership.jfrog.io/artifactory/artifactory7-partnership-helm/
