@@ -1,6 +1,6 @@
 dependencies:
-- name: artifactory-ha
-  repository: https://charts.jfrog.io
-  version: 2.4.0
-digest: sha256:b2c954e35edee8092391c1697f093851da02c29cbd364eef51a1a02644c784ef
-generated: "2020-04-15T23:28:12.7184783Z"
+- name: unified
+  repository: https://partnership.jfrog.io/artifactory/artifactory7-partnership-helm/
+  version: 1.0.0
+digest: sha256:ac799014a2c0940a7100bcf89341fe49932a39d44aff99cac220eaf656747f42
+generated: "2020-05-28T22:23:10.8718393Z"

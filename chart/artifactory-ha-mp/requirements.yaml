@@ -1,4 +1,4 @@
 dependencies:
 - name: unified
-  version: $UNIFIED_CHART_VERSION
+  version: 1.0.0
   repository: https://partnership.jfrog.io/artifactory/artifactory7-partnership-helm/
