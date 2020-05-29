@@ -5,6 +5,8 @@ installer:
 
 artifactory-ha:
   installerInfo: '{"productId":"GKE_artifactory-ha/1.0.0","features":[{"featureId":"Partner/ACC-007222"}]}'
+  postgresql:
+    enabled: false
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/

@@ -63,6 +63,11 @@ properties:
     description: "You can generate one with the command: openssl rand -hex 32"
     default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     type: string
+  artifactory-ha.artifactory.joinKey:
+    title: "Artifactory requires a unique join key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    type: string
   artifactory-ha.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
@@ -87,7 +92,7 @@ properties:
     type: integer
     title: "Artifactory Member Node count"
     description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
-    default: 2
+    default: 3
     minimum: 1
     maximum: 10
   artifactory-ha.artifactory.node.resources.requests.cpu:
@@ -128,11 +133,66 @@ properties:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
+  artifactory-ha.database.type:
+    title: "Artifactory Database Type"
+    description: "Which type of database you want Artifactory to use"
+    default: "postgresql"
+    type: string
+  artifactory-ha.database.driver:
+    title: "Artifactory Database Driver"
+    description: "Which database driver you want Artifactory to use"
+    default: "org.postgresql.Driver"
+    type: string
+  artifactory-ha.database.url:
+    title: "Artifactory Database JDBC URL"
+    description: "Enter the Artifactory Database JBDC URL to be used"
+    default: "jdbc:postgresql://postgres-postgresql:5432/artifactory"
+    type: string
+  artifactory-ha.database.user:
+    title: "Artifactory Database User"
+    description: "Enter the Artifactory Database username to be used"
+    default: "artifactory"
+    type: string
+  artifactory-ha.database.password:
+    title: "Artifactory Database Password"
+    description: "Enter the Artifactory Database password to be used"
+    default: "password"
+    type: string
+  xray.xray.jfrogUrl:
+    title: "JFrog Artifactory URL"
+    description: "Enter the Artifactory URL for Xray to connect to"
+    default: "http://artifactory-xray-nginx"
+    type: string
+  xray.xray.masterKey:
+    title: "Xray Master Key"
+    description: "Use the same master key as Artifactory"
+    default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+    type: string
+  xray.xray.joinKey:
+    title: "Xray Join Key"
+    description: "Use the same join key as Artifactory"
+    default: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    type: string
+  xray.database.url:
+    title: "Xray Postgresql Database URL"
+    description: "Enter the Postgresql Database URL for Xray"
+    default: "postgres://postgres-postgresql:5432/xraydb?sslmode=disable"
+    type: string
+  xray.database.user:
+    title: "Xray Database User"
+    description: "Enter the Postgresql User for Xray"
+    default: "artifactory"
+    type: string
+  xray.database.password:
+    title: "Xray Database Password"
+    description: "Enter the Postgresql Password for Xray"
+    default: "password"
+    type: string
+  xray.xray.
 required:
   - name
   - namespace
   - artifactory-ha.serviceAccount.name
-  - artifactory-ha.postgresql.postgresqlPassword
   - artifactory-ha.artifactory.masterKey
   - artifactory-ha.artifactory.node.replicaCount
   - artifactory-ha.artifactory.persistence.size
@@ -146,3 +206,14 @@ required:
   - artifactory-ha.artifactory.node.resources.limits.memory
   - artifactory-ha.artifactory.javaOpts.other
   - artifactory-ha.nginx.service.type
+  - artifactory-ha.database.type
+  - artifactory-ha.database.driver
+  - artifactory-ha.database.url
+  - artifactory-ha.database.user
+  - artifactory-ha.database.password
+  - xray.xray.jfrogUrl
+  - xray.xray.masterKey
+  - xray.xray.joinKey
+  - xray.database.url
+  - xray.database.user
+  - xray.database.password
