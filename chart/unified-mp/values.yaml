@@ -17,15 +17,13 @@ xray:
   common:
     customInitContainers: |
       - name: "rt-services-wait-setup"
-        image: "{{ .Values.initContainerImage }}"
-        imagePullPolicy: "{{ .Values.imagePullPolicy }}"
+        image: alpine:3.10
+        imagePullPolicy: Always
         command:
           - 'sh'
           - '-c'
           - 'sleep 450;'
-        volumeMounts:
-          - mountPath: "{{ .Values.xray.persistence.mountPath }}"
-            name: data-volume
+
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
