@@ -188,6 +188,16 @@ properties:
     description: "Enter the Artifactory Database password to be used"
     default: "password"
     type: string
+  artifactory-ha.artifactory.license.secret:
+    title: "Artifactory License K8s Secret Name"
+    description: "Enter the K8s secret name used for the Artifactory License"
+    default: ""
+    type: string
+  artifactory-ha.artifactory.license.dataKey:
+    title: "Artifactory License K8s Secret Data Key"
+    description: "Enter the key name used for the Artifactory License k8s secret"
+    default: ""
+    type: string
   xray.enabled:
     title: "Enable or disable the use of JFrog Xray"
     description: "True/False toggle switch to turn on/off JFrog Xray"
