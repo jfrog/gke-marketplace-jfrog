@@ -6,13 +6,13 @@ installer:
 artifactory-ha:
   installerInfo: '{"productId":"GKE_artifactory-ha/1.0.0","features":[{"featureId":"Partner/ACC-007222"}]}'
   postgresql:
-    enabled: true
+    enabled: false
 
 xray:
   enabled: true
   unifiedUpgradeAllowed: true
   postgresql:
-    enabled: true
+    enabled: false
   # sleep the xray to let artifactory come up first
   common:
     customInitContainers: |
