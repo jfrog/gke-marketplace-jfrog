@@ -14,15 +14,8 @@ xray:
   postgresql:
     enabled: false
   # sleep the xray to let artifactory come up first
-  #common:
-  #  customInitContainers: |
-  #    - name: "rt-services-wait-setup"
-  #      image: alpine:3.10
-  #      imagePullPolicy: Always
-  #      command:
-  #        - 'sh'
-  #        - '-c'
-  #        - 'sleep 450;'
+  common:
+    preStartCommand: 'sleep 900;'
 
 
 ## Role Based Access Control
