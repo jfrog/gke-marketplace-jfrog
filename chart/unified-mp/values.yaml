@@ -15,8 +15,7 @@ xray:
     enabled: false
   # sleep the xray to let artifactory come up first
   common:
-    preStartCommand: 'sleep 900;'
-
+    preStartCommand: "sleep 450"
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
