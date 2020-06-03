@@ -8,6 +8,12 @@ artifactory-ha:
   postgresql:
     enabled: false
 
+xray:
+  enabled: true
+  unifiedUpgradeAllowed: true
+  postgresql:
+    enabled: false
+
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
 rbac:

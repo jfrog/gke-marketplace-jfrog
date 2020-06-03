@@ -1,5 +1,5 @@
 engine: gotpl
-name: artifactory-ha-mp
+name: unified-mp
 home: https://www.jfrog.com/artifactory/
 version: $ARTIFACTORY_CHART_VERSION
 appVersion: $ARTIFACTORY_VERSION

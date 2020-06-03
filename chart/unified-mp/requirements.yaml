@@ -5,3 +5,4 @@ dependencies:
 - name: xray
   version: $XRAY_CHART_VERSION
   repository: https://charts.jfrog.io
+  condition: xray.enabled

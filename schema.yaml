@@ -158,6 +158,11 @@ properties:
     description: "Enter the Artifactory Database password to be used"
     default: "password"
     type: string
+  xray.enabled:
+    title: "Enable or disable the use of JFrog Xray"
+    description: "True/False toggle switch to turn on/off JFrog Xray"
+    default: true
+    type: boolean
   xray.xray.jfrogUrl:
     title: "JFrog Artifactory URL"
     description: "Enter the Artifactory URL for Xray to connect to"
@@ -188,7 +193,6 @@ properties:
     description: "Enter the Postgresql Password for Xray"
     default: "password"
     type: string
-  xray.xray.
 required:
   - name
   - namespace
@@ -211,9 +215,4 @@ required:
   - artifactory-ha.database.url
   - artifactory-ha.database.user
   - artifactory-ha.database.password
-  - xray.xray.jfrogUrl
-  - xray.xray.masterKey
-  - xray.xray.joinKey
-  - xray.database.url
-  - xray.database.user
-  - xray.database.password
+  - xray.enabled
