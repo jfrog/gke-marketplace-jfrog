@@ -15,7 +15,7 @@ xray:
     enabled: false
   # sleep the xray to let artifactory come up first
   common:
-    preStartCommand: "until nc -z -w 2 unified-nginx 80 && echo rt ok; do sleep 30; done"
+    preStartCommand: "until nc -z -w 2 unified-nginx 80; do sleep 300; exit 0;  done"
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
