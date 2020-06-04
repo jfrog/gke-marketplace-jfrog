@@ -233,11 +233,6 @@ properties:
     description: "Enter the Postgresql Password for Xray"
     default: "password"
     type: string
-  xray.common.customInitContainers:
-    title: "Xray Wait For RT"
-    description: "DO NOT CHANGE"
-    default: "- name: rt-services-wait-setup\n  image: alpine:3.10\n  imagePullPolicy: Always\n  command:\n    - 'sh'\n    - '-c'\n    - 'sleep 450;'\n"
-    type: string
 required:
   - name
   - namespace

@@ -14,8 +14,8 @@ xray:
   postgresql:
     enabled: false
   # sleep the xray to let artifactory come up first
-  #common:
-  #  customInitContainers: "- name: rt-services-wait-setup\n  image: alpine:3.10\n  imagePullPolicy: Always\n  command:\n    - 'sh'\n    - '-c'\n    - 'sleep 450;'\n"
+  common:
+    preStartCommand: "sleep 30"
 
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
