@@ -4,5 +4,5 @@ dependencies:
   repository: https://charts.jfrog.io
 - name: xray
   version: $XRAY_CHART_VERSION
-  repository:  https://partnership.jfrog.io/artifactory/artifactory-xray/
+  repository:  partnership
   condition: xray.enabled
