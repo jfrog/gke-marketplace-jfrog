@@ -2,7 +2,7 @@ engine: gotpl
 name: unified-mp
 home: https://www.jfrog.com/artifactory/
 version: $ARTIFACTORY_CHART_VERSION
-appVersion: $ARTIFACTORY_VERSION
+appVersion: $GKE_PUBLISHED_VERSION
 description: Universal Repository Manager supporting all major packaging formats,
   build tools and CI servers.
 keywords:
