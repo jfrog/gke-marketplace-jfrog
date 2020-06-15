@@ -39,36 +39,31 @@ x-google-marketplace:
         xray.server.image.repository:
           type: REPO_WITH_REGISTRY
         xray.server.image.version:
-          type: string
-          default: "7.5.5"
+          type: TAG
     xray-analysis:
       properties:
         xray.analysis.image.repository:
           type: REPO_WITH_REGISTRY
         xray.analysis.image.version:
-          type: string
-          default: "7.5.5"
+          type: TAG
     xray-indexer:
       properties:
         xray.indexer.image.repository:
           type: REPO_WITH_REGISTRY
         xray.indexer.image.version:
-          type: string
-          default: "7.5.5"
+          type: TAG
     xray-persist:
       properties:
         xray.persist.image.repository:
           type: REPO_WITH_REGISTRY
         xray.persist.image.version:
-          type: string
-          default: "7.5.5"
+          type: TAG
     xray-router:
       properties:
         xray.router.image.repository:
           type: REPO_WITH_REGISTRY
         xray.router.image.version:
-          type: string
-          default: "7.5.5"
+          type: TAG
 
 # Other fields, like clusterConstraints, can be included here.
 # The Properties and Required sections of v2 are structured the same as those of v1.
