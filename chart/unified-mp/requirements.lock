@@ -1,9 +1,9 @@
 dependencies:
 - name: artifactory-ha
   repository: https://charts.jfrog.io
-  version: 2.4.10
+  version: 2.5.0
 - name: xray
-  repository: https://charts.jfrog.io
+  repository: https://partnership.jfrog.io/artifactory/artifactory7-partnership-helm/
   version: 3.3.2
-digest: sha256:fdb850f1f8a597005d9250baa1ed86118cf2a84f1494366e1cdccb2fa59d5469
-generated: "2020-05-29T15:47:32.048445-07:00"
+digest: sha256:0adced42ac801c569645fd0125a756a1e0913307e0a86a10ea419870378a0596
+generated: "2020-06-17T23:36:14.837932601Z"
