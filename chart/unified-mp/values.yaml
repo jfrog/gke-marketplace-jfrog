@@ -15,6 +15,7 @@ xray:
     enabled: false
   # sleep the xray to let artifactory come up first
   common:
+    xrayVersion: $GKE_PUBLISHED_VERSION
     preStartCommand: "until nc -z -w 2 unified-nginx 80; do sleep 300; exit 0;  done"
 
 ## Role Based Access Control
