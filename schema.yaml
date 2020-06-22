@@ -9,7 +9,7 @@ x-google-marketplace:
   publishedVersion: '$GKE_PUBLISHED_VERSION'
   publishedVersionMetadata:
     releaseNote: >-
-      Initial release.
+      Unified Artifactory and Xray Marketplace Version 1.0.0
     # releaseTypes list is optional.
     # "Security" should only be used if this is an important update to patch
     # an existing vulnerability, as such updates will display more prominently for users.
