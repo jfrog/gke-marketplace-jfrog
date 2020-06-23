@@ -206,7 +206,7 @@ properties:
   xray.xray.jfrogUrl:
     title: "JFrog Artifactory URL"
     description: "Enter the Artifactory URL for Xray to connect to"
-    default: "http://artifactory-xray-nginx"
+    default: "http://unified-nginx"
     type: string
   xray.xray.masterKey:
     title: "Xray Master Key"
