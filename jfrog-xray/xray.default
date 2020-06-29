@@ -1,0 +1,2 @@
+export PARTNER_ID=Partner/ACC-007222
+export INTEGRATION_NAME=GKE_xray/1.0.0

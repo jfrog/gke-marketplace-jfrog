@@ -1,3 +1,5 @@
 FROM docker.bintray.io/jfrog/xray-server:$XRAY_VERSION
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-server /docker/xray/Dockerfile.GKE
+COPY xray.default /opt/jfrog/xray/app/bin
+
