@@ -80,6 +80,11 @@ properties:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
+      serviceAccount:
+        description: >
+          Monitors cluster-wide app dependencies,
+          managing CoreOS application instances and their clusters.
+        roles: []
   artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:
