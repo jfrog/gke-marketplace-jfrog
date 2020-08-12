@@ -1,4 +1,4 @@
-FROM docker.bintray.io/jfrog/xray-analysis:$XRAY_VERSION
+FROM docker.bintray.io/jfrog/xray-analysis:4.1.3
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-analysis /docker/xray/Dockerfile.GKE
 COPY xray.default /opt/jfrog/xray/app/bin
