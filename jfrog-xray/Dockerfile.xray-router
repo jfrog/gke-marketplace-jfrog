@@ -1,4 +1,4 @@
-FROM docker.bintray.io/jfrog/router:$ROUTER_VERSION
+FROM docker.bintray.io/jfrog/router:1.4.0
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-router /docker/xray/Dockerfile.GKE
 COPY xray.default /opt/jfrog/xray/app/bin
