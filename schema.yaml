@@ -24,44 +24,56 @@ x-google-marketplace:
   images:
     '':  # Primary image has no name.
       properties:
+        artifactory-ha.artifactory.image.registry:
+          type: REGISTRY
         artifactory-ha.artifactory.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY      
         artifactory-ha.artifactory.image.version:
           type: TAG
     nginx-artifactory-pro:
       properties:
         artifactory-ha.nginx.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY     
         artifactory-ha.nginx.image.version:
           type: TAG
     xray-server:
       properties:
+        xray.server.image.registry:
+          type: REGISTRY
         xray.server.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY
         xray.server.image.version:
           type: TAG
     xray-analysis:
       properties:
+        xray.analysis.image.registry:
+          type: REGISTRY
         xray.analysis.image.repository:
-          type: REPO_WITH_REGISTRY
-        xray.analysis.image.version:
-          type: TAG
+          type: REPO_WITHOUT_REGISTRY
+        xray.indexer.image.version:
+          type: TAG       
     xray-indexer:
       properties:
+        xray.indexer.image.registry:
+          type: REGISTRY
         xray.indexer.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY
         xray.indexer.image.version:
           type: TAG
     xray-persist:
       properties:
+        xray.persist.image.registry:
+          type: REGISTRY     
         xray.persist.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY
         xray.persist.image.version:
           type: TAG
     xray-router:
       properties:
+        xray.router.image.registry:
+          type: REGISTRY       
         xray.router.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY
         xray.router.image.version:
           type: TAG
 
