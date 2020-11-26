@@ -1,4 +1,4 @@
-FROM docker.bintray.io/jfrog/xray-persist:3.10.3
+FROM docker.bintray.io/jfrog/xray-persist:3.11.2
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-persist /docker/xray/Dockerfile.GKE
 COPY xray.default /opt/jfrog/xray/app/bin
