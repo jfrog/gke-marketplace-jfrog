@@ -32,6 +32,8 @@ x-google-marketplace:
           type: TAG
     nginx-artifactory-pro:
       properties:
+        artifactory-ha.nginx.image.registry:
+          type: REGISTRY
         artifactory-ha.nginx.image.repository:
           type: REPO_WITHOUT_REGISTRY     
         artifactory-ha.nginx.image.version:
