@@ -54,7 +54,7 @@ export ZONE=us-west1-a
 export MACHINE_TYPE=n1-standard-4
 
 # create the cluster using google command line tools
-gcloud container clusters create "$CLUSTER" --zone "$ZONE" ---machine-type "$MACHINE_TYPE"
+gcloud container clusters create "$CLUSTER" --zone "$ZONE" --machine-type "$MACHINE_TYPE"
 ```
 
 Configure `kubectl` to connect to the new cluster:
@@ -110,7 +110,7 @@ gcloud auth configure-docker
 
 Pull the deployer image to your local docker registry
 ```shell
-docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.10
+docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.11
 ```
 
 #### Run installer script
@@ -130,11 +130,48 @@ Creat the namepsace
 kubectl create namespace $NAMESPACE
 ```
 
+Befor running deployer need to setup Postgres database using below steps:
+```shell
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install postgres bitnami/postgresql --set persistence.size=500Gi    ## install in your own namespace
+
+
+Above steps will create the Postgresql Pod but now we need to configure the database for Artifactory as well as X-ray. Below steps are to be followed for configuring database:
+
+The output of above command (helm install postgres bitnami/postgresql --set persistence.size=500Gi) will provide steps for configuring database:
+
+
+export POSTGRES_PASSWORD=$(kubectl get secret –namespace default postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+
+
+kubectl run postgres-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:11.9.0-debian-10-r73 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U postgres -d postgres -p 5432
+
+
+The output of above command will take you inside the database, use below commands for creating the Database user and also providing privileges for the database
+
+
+CREATE USER artifactory WITH PASSWORD 'password';
+CREATE DATABASE artifactory WITH OWNER=artifactory ENCODING='UTF8';
+GRANT ALL PRIVILEGES ON DATABASE artifactory TO artifactory;
+
+
+Update the same for Xray also:
+
+
+CREATE DATABASE xraydb WITH OWNER=artifactory ENCODING='UTF8';
+GRANT ALL PRIVILEGES ON DATABASE xraydb TO artifactory;
+
+## Need to Generate Keys for both Master as well as Join:
+```shell
+  openssl rand -hex 32
+```
+
 Run the install script
 
 ```shell
-./scripts/mpdev scripts/install  --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.10   --parameters='{"name": "'$NAME'", "namespace": "'$NAMESPACE'"}'
-
+./scripts/mpdev install --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.11 --parameters='{"name": "unified", "namespace": "default", "artifactory-ha.nginx.tlsSecretName": "artifactory-ha-tls", "artifactory-ha.artifactory.masterKey": "master key", "artifactory-ha.artifactory.joinKey": "join key", "xray.xray.masterKey": "same as artifactory master key", "xray.xray.joinKey": "same as artifactory join key" }'
 ```
 
 Watch the deployment come up with
