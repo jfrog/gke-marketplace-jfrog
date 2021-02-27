@@ -6,7 +6,7 @@ x-google-marketplace:
   # The release version is required in the schema and MUST match the
   # release tag on the the deployer.
   # This version will be used as an image tag for Artifactory and Nginx images
-  publishedVersion: '7.11.5'
+  publishedVersion: '$TAG'
   publishedVersionMetadata:
     releaseNote: >-
       Unified Artifactory and Xray Marketplace Version 1.0.0
@@ -98,7 +98,16 @@ properties:
         description: >
           Monitors cluster-wide app dependencies,
           managing CoreOS application instances and their clusters.
-        roles: []
+        roles:
+          - type: ClusterRole        # This is a cluster-wide ClusterRole
+            rulesType: PREDEFINED
+            rulesFromRoleName: view  # Use predefined role named "view"
+          - type: Role               # This is a namespaced Role
+            rulesType: CUSTOM
+            rules:
+              - apiGroups: [ 'apps.kubernetes.io' ]
+                resources: [ 'applications' ]
+                verbs: [ '*' ]
   artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:

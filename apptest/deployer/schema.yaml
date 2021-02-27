@@ -1,0 +1,26 @@
+properties:
+  testerImage:
+    type: string
+    default: $REGISTRY/tester:$TAG
+    x-google-property:
+      type: IMAGE
+  artifactory-ha.artifactory.masterKey:
+    title: 'Artifactory requires a unique master key'
+    description: 'You can generate one with the command: openssl rand -hex 32'
+    default: '13661eac288a991c10bb2effd9ebd7e13f910b03a3127e9af175efbfa59d173d'
+    type: string
+  artifactory-ha.artifactory.joinKey:
+    title: "Artifactory requires a unique join key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+    type: string
+  xray.xray.masterKey:
+    title: "Xray Master Key"
+    description: "Use the same master key as Artifactory"
+    default: "0b40b48f3f80eff97bd5c15a27cfbf041ed8b89e49e6b7d7b4450c75f7ba5006"
+    type: string
+  xray.xray.joinKey:
+    title: "Xray Join Key"
+    description: "Use the same join key as Artifactory"
+    default: "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+    type: string
