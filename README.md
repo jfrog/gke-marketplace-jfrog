@@ -110,7 +110,7 @@ gcloud auth configure-docker
 
 Pull the deployer image to your local docker registry
 ```shell
-docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.11
+docker pull gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:<RT_VERSION>
 ```
 
 #### Run installer script
@@ -125,64 +125,137 @@ export NAMESPACE=<namespace>
 
 ```
 
-Creat the namepsace
+Create the namepsace
 ```shell
 kubectl create namespace $NAMESPACE
 ```
 
-Befor running deployer need to setup Postgres database using below steps:
+Before running the deployer, external database needs to be deployed. It will be used by Artifactory and Xray applications.
+More information on coniguring databases you can find [here](https://www.jfrog.com/confluence/display/JFROG/Configuring+the+Database)
+Postgres database can be deployed and configured using steps below:
 ```shell
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install postgres bitnami/postgresql --set persistence.size=500Gi    ## install in your own namespace
+helm install postgres bitnami/postgresql --set persistence.size=500Gi,service.type=LoadBalancer    ## install in your own namespace
 
+```
+The steps above will create the Postgresql Pod but now we need to create and configure the database for Artifactory as well as Xray. Please follow the steps below to configure databases:
 
-Above steps will create the Postgresql Pod but now we need to configure the database for Artifactory as well as X-ray. Below steps are to be followed for configuring database:
-
-The output of above command (helm install postgres bitnami/postgresql --set persistence.size=500Gi) will provide steps for configuring database:
-
-
-export POSTGRES_PASSWORD=$(kubectl get secret –namespace default postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
-
-
+The output of command above (helm install postgres bitnami/postgresql --set persistence.size=500Gi,service.type=LoadBalancer) will provide steps for configuring database:
+```
+export POSTGRES_PASSWORD=$(kubectl get secret -–namespace default postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
 kubectl run postgres-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:11.9.0-debian-10-r73 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U postgres -d postgres -p 5432
-
-
-The output of above command will take you inside the database, use below commands for creating the Database user and also providing privileges for the database
-
-
-CREATE USER artifactory WITH PASSWORD 'password';
+```
+The output of that command will take you to the Postgresql console. Use following commands for creating the Database user and also providing privileges for the database
+```
+CREATE USER artifactory WITH PASSWORD '<YOUR_PASSWORD>';
 CREATE DATABASE artifactory WITH OWNER=artifactory ENCODING='UTF8';
 GRANT ALL PRIVILEGES ON DATABASE artifactory TO artifactory;
+```
 
-
-Update the same for Xray also:
-
-
+Create and configure database for Xray as well:
+```
 CREATE DATABASE xraydb WITH OWNER=artifactory ENCODING='UTF8';
 GRANT ALL PRIVILEGES ON DATABASE xraydb TO artifactory;
+```
+To exit Postgres console, type `\q`.
 
-## Need to Generate Keys for both Master as well as Join:
-```shell
+Get external IP address of Postgresql Load balancer:
+```
+kubectl get svc --namespace=$NAMESPACE 
+```
+Copy IP address from the EXTERNAL-IP column. It will be used in the DB connection string later.
+
+Generate Master and Join keys:
+
+```
   openssl rand -hex 32
 ```
+Join key should be the same for Artifactory and Xray, otherwise Xray won't be able to connect to Artifactory.
 
-Run the install script
+Create TLS k8s secret, if needed: 
+
+```
+kubectl create secret tls unified-tls-ingress --cert=certfile.crt --key=keyfile.key
+```
+
+Optional - add k8s license secret. You can also add a license/licenses after the installation using [Install HA cluster license API](https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API#ArtifactoryRESTAPI-InstallHAClusterLicenses) or 
+using [Artifactory UI](https://www.jfrog.com/confluence/display/JFROG/Managing+Licenses#ManagingLicenses-LicensesManagement)
+
+```
+kubectl create secret generic artifactory-license --from-file=artifactory.cluster.license 
+```
+Create JSON document with installation parameters, replace <POSTGRES_LB_IP> with actual Postgresql Load balancer external IP address. 
+Assign this document to environment variable $ARGS_JSON. 
+
+Example of parameters to deploy **Artifactory** and **Xray** with external Postgresql:
+
+```
+export ARGS_JSON='{
+  "name": "unified",
+  "namespace": "default",
+  "xray.enabled": true,
+  "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress",
+  "artifactory-ha.nginx.service.ssloffload": true,
+  "artifactory-ha.artifactory.node.replicaCount": 1,
+  "artifactory-ha.artifactory.license.secret": "artifactory-license",
+  "artifactory-ha.artifactory.license.dataKey": "artifactory.cluster.license",
+  "artifactory-ha.database.type": "postgresql",
+  "artifactory-ha.database.driver": "org.postgresql.Driver",
+  "artifactory-ha.database.url": "jdbc:postgresql://<POSTGRES_LB_IP>:5432/artifactory",
+  "artifactory-ha.database.user": "artifactory",
+  "artifactory-ha.database.password": "<YOUR_PASSWORD>",
+  "xray.database.user": "artifactory",
+  "xray.database.password": "password",
+  "xray.database.url": "postgres://<POSTGRES_LB_IP>:5432/xraydb?sslmode=disable",
+  "xray.xray.jfrogUrl": "http://unified-nginx",
+  "xray.xray.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173",
+  "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+}'
+```
+
+Example of parameters to install **Artifactory** only, with external Postgresql:
+```
+export ARGS_JSON='{
+  "name": "unified",
+  "namespace": "default",
+  "xray.enabled": false,
+  "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress",
+  "artifactory-ha.nginx.service.ssloffload": true,
+  "artifactory-ha.artifactory.node.replicaCount": 1,
+  "artifactory-ha.artifactory.license.secret": "artifactory-license",
+  "artifactory-ha.artifactory.license.dataKey": "artifactory.cluster.license",
+  "artifactory-ha.database.type": "postgresql",
+  "artifactory-ha.database.driver": "org.postgresql.Driver",
+  "artifactory-ha.database.url": "jdbc:postgresql://<POSTGRES_LB_IP>:5432/artifactory",
+  "artifactory-ha.database.user": "artifactory",
+  "artifactory-ha.database.password": "<YOUR_PASSWORD>",
+  "xray.database.url": "postgres://<POSTGRES_LB_IP>:5432/xraydb?sslmode=disable",
+  "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+}'
+```
+
+Run the installation script: 
 
 ```shell
-./scripts/mpdev install --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:7.11 --parameters='{"name": "unified", "namespace": "default", "artifactory-ha.nginx.tlsSecretName": "artifactory-ha-tls", "artifactory-ha.artifactory.masterKey": "master key", "artifactory-ha.artifactory.joinKey": "join key", "xray.xray.masterKey": "same as artifactory master key", "xray.xray.joinKey": "same as artifactory join key" }'
+./scripts/mpdev install --deployer=gcr.io/jfrog-gc-mp/jfrog-artifactory/deployer:<RT_VERSION> --parameters=$ARGS_JSON	
 ```
+
 
 Watch the deployment come up with
 
 ```shell
 kubectl get pods -n $NAMESPACE --watch
 ```
+Artifactory UI will be on the external load balancer IP, which can be found by running 
+```shell
+kubectl get svc -n $NAMESPACE
+```
 
 # Delete the Application
 
-There are two approaches to deleting the Artifactory-ha
+There are two approaches to deleting the Artifactory-ha (Unified)
 
 * [Using the Google Cloud Platform Console](#using-platform-console)
 
@@ -193,7 +266,7 @@ There are two approaches to deleting the Artifactory-ha
 
 1. In the GCP Console, open [Kubernetes Applications](https://console.cloud.google.com/kubernetes/application).
 
-1. From the list of applications, click **artifactory-ha**.
+1. From the list of applications, click **unified**.
 
 1. On the Application Details page, click **Delete**.
 
@@ -203,7 +276,7 @@ Set your application instance name and the Kubernetes namespace used to deploy:
 
 ```shell
 # set the application instance name
-export APP_INSTANCE_NAME=artifactory-ha
+export APP_INSTANCE_NAME=unified
 
 # set the Kubernetes namespace the application was originally installed
 export NAMESPACE=<namespace>
@@ -245,7 +318,7 @@ kubectl delete persistentvolumeclaims \
 
 ### Delete the GKE cluster
 
-Optionally, if you don't need the deployed application or the GKE cluster,
+Optionally, if you don't need the deployed application, or the GKE cluster,
 delete the cluster using this command:
 
 ```shell
