@@ -33,5 +33,5 @@ COPY --from=build /tmp/test/artifactory-mp.tar.gz /data-test/chart/
 COPY --from=build /tmp/apptest/schema.yaml /data-test/
 COPY --from=build /tmp/schema.yaml /data/
 
-ENV WAIT_FOR_READY_TIMEOUT 2800
+ENV WAIT_FOR_READY_TIMEOUT 3600
 ENV TESTER_TIMEOUT 3600

@@ -17,12 +17,6 @@ if [[ -f "${KUBE_CONFIG}" ]]; then
 elif [[ -d "${KUBE_CONFIG}" ]]; then
   # Mount as a directory.
   kube_mount=(--mount "type=bind,source=${KUBE_CONFIG},target=/mount/config/.kube,readonly")
-elif [[ -f "${KUBE_CONFIG}" ]]; then
-  # Mount as a file.
-  kube_mount=(--mount "type=bind,source=${KUBE_CONFIG},target=/mount/config/.kube/config,readonly")
-elif [[ -d "${KUBE_CONFIG}" ]]; then
-  # Mount as a directory.
-  kube_mount=(--mount "type=bind,source=${KUBE_CONFIG},target=/mount/config/.kube,readonly")
 fi
 
 gcloud_mount=""
@@ -31,14 +25,6 @@ gcloud_mount=""
 # mount path in the container.
 gcloud_original_path=""
 if [[ -e "${GCLOUD_CONFIG}" ]]; then
-  gcloud_mount=(--mount "type=bind,source=${GCLOUD_CONFIG},target=/mount/config/.config/gcloud,readonly")
-  # Note: readlink -f doesn't work on non-GNU so we would fallback to python in that case.
-  canonical_gcloud_config="$( \
-    readlink -f "${GCLOUD_CONFIG}" 2> /dev/null \
-    || python3 -c 'import os,sys;print(os.path.realpath(sys.argv[1]))' "${GCLOUD_CONFIG}" \
-  )"
-  gcloud_original_path=(--env "GCLOUD_ORIGINAL_PATH=${canonical_gcloud_config}")
-elif [[ -e "${GCLOUD_CONFIG}" ]]; then
   gcloud_mount=(--mount "type=bind,source=${GCLOUD_CONFIG},target=/mount/config/.config/gcloud,readonly")
   # Note: readlink -f doesn't work on non-GNU so we would fallback to python in that case.
   canonical_gcloud_config="$( \
