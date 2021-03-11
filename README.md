@@ -137,7 +137,7 @@ Postgres database can be deployed and configured using steps below:
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install postgres bitnami/postgresql --set persistence.size=500Gi,service.type=LoadBalancer    ## install in your own namespace
+helm install postgres bitnami/postgresql --set persistence.size=500Gi ## install in your own namespace
 
 ```
 The steps above will create the Postgresql Pod but now we need to create and configure the database for Artifactory as well as Xray. Please follow the steps below to configure databases:
@@ -186,7 +186,7 @@ using [Artifactory UI](https://www.jfrog.com/confluence/display/JFROG/Managing+L
 ```
 kubectl create secret generic artifactory-license --from-file=artifactory.cluster.license 
 ```
-Create JSON document with installation parameters, replace <POSTGRES_LB_IP> with actual Postgresql Load balancer external IP address. 
+Create JSON document with installation parameters, replace <POSTGRES_CLUSTER_IP> with actual Postgresql Load balancer external IP or cluster IP address. 
 Assign this document to environment variable $ARGS_JSON. 
 
 Example of parameters to deploy **Artifactory** and **Xray** with external Postgresql:
@@ -203,12 +203,12 @@ export ARGS_JSON='{
   "artifactory-ha.artifactory.license.dataKey": "artifactory.cluster.license",
   "artifactory-ha.database.type": "postgresql",
   "artifactory-ha.database.driver": "org.postgresql.Driver",
-  "artifactory-ha.database.url": "jdbc:postgresql://<POSTGRES_LB_IP>:5432/artifactory",
+  "artifactory-ha.database.url": "jdbc:postgresql://<POSTGRES_CLUSTER_IP>:5432/artifactory",
   "artifactory-ha.database.user": "artifactory",
   "artifactory-ha.database.password": "<YOUR_PASSWORD>",
   "xray.database.user": "artifactory",
   "xray.database.password": "password",
-  "xray.database.url": "postgres://<POSTGRES_LB_IP>:5432/xraydb?sslmode=disable",
+  "xray.database.url": "postgres://<POSTGRES_CLUSTER_IP>:5432/xraydb?sslmode=disable",
   "xray.xray.jfrogUrl": "http://unified-nginx",
   "xray.xray.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173",
   "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
@@ -231,7 +231,7 @@ export ARGS_JSON='{
   "artifactory-ha.database.url": "jdbc:postgresql://<POSTGRES_LB_IP>:5432/artifactory",
   "artifactory-ha.database.user": "artifactory",
   "artifactory-ha.database.password": "<YOUR_PASSWORD>",
-  "xray.database.url": "postgres://<POSTGRES_LB_IP>:5432/xraydb?sslmode=disable",
+  "xray.database.url": "postgres://<POSTGRES_CLUSTER_IP>:5432/xraydb?sslmode=disable",
   "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
 }'
 ```
