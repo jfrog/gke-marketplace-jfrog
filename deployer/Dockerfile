@@ -5,6 +5,15 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends gettext
 
 ADD chart/unified-mp /tmp/chart
+
+ARG TAG
+
+RUN cat /tmp/chart/values.yaml \
+    | env -i "TAG=$TAG" envsubst \
+    > /tmp/chart/values.yaml.new \
+    && mv /tmp/chart/values.yaml.new /tmp/chart/values.yaml \
+    && cd /tmp && tar -czvf /tmp/artifactory-mp.tar.gz chart
+
 RUN cd /tmp && tar -czvf /tmp/artifactory-mp.tar.gz chart
 
 ADD apptest/deployer/artifactory-ha /tmp/test/chart

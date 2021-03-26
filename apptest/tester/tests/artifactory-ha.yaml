@@ -2,8 +2,8 @@ actions:
   - name: Artifactory jfrt service check
     bashTest:
       script: |-
-        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'artifactory*' | awk '{$2=$2};1' | cut -f4 -d ' ')
-        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[4].state")
+        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'nginx*' | awk '{$2=$2};1' | cut -f4 -d ' ')
+        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[3].state")
         echo "${STATUS}"
       expect:
         stdout:

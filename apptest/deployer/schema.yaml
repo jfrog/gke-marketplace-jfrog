@@ -4,6 +4,11 @@ properties:
     default: $REGISTRY/tester:$TAG
     x-google-property:
       type: IMAGE
+  artifactory-ha.postgresql.enabled:
+    title: "Deploy Postgres using subchart"
+    description: "Deploys Postgres using Postgres subchart, not recommended for production usage"
+    default: true
+    type: boolean
   artifactory-ha.artifactory.masterKey:
     title: 'Artifactory requires a unique master key'
     description: 'You can generate one with the command: openssl rand -hex 32'
@@ -23,4 +28,44 @@ properties:
     title: "Xray Join Key"
     description: "Use the same join key as Artifactory"
     default: "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+    type: string
+  artifactory-ha.database.type:
+    title: "Artifactory Database Type"
+    description: "Which type of database you want Artifactory to use"
+    default: ""
+    type: string
+  artifactory-ha.database.driver:
+    title: "Artifactory Database Driver"
+    description: "Which database driver you want Artifactory to use"
+    default: ""
+    type: string
+  artifactory-ha.database.url:
+    title: "Artifactory Database JDBC URL"
+    description: "Enter the Artifactory Database JBDC URL to be used"
+    default: ""
+    type: string
+  artifactory-ha.database.user:
+    title: "Artifactory Database User"
+    description: "Enter the Artifactory Database username to be used"
+    default: ""
+    type: string
+  artifactory-ha.database.password:
+    title: "Artifactory Database Password"
+    description: "Enter the Artifactory Database password to be used"
+    default: ""
+    type: string
+  xray.enabled:
+    title: "Enable or disable the use of JFrog Xray"
+    description: "True/False toggle switch to turn on/off JFrog Xray"
+    default: false
+    type: boolean
+  xray.postgresql.postgresqlUsername:
+    title: "Xray Postgresql Database username (use if Postgres subchart deployment is enabled)"
+    description: "Enter Postgresql Password for Xray"
+    default: "artifactory"
+    type: string
+  xray.postgresql.postgresqlPassword:
+    title: "Xray Postgresql Database password (use if Postgres subchart deployment is enabled)"
+    description: "Enter Postgresql Password for Xray"
+    default: "password"
     type: string

@@ -181,8 +181,8 @@ properties:
   artifactory-ha.nginx.service.ssloffload:
     title: "Nginx SSL offload"
     description: "Offload the SSL decryption processing from backend servers"
-    type: boolean
     default: false
+    type: boolean
   artifactory-ha.nginx.service.loadBalancerIP:
     title: "Provide static ip address"
     description: "Provide static ip address for LoadBalancer. Optional for GKE."
@@ -191,6 +191,11 @@ properties:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
+  artifactory-ha.postgresql.enabled:
+    title: "Deploy Postgres using subchart"
+    description: "Deploys Postgres using Postgres subchart, not recommended for production usage"
+    default: false
+    type: boolean
   artifactory-ha.database.type:
     title: "Artifactory Database Type"
     description: "Which type of database you want Artifactory to use"
