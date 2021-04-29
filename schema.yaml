@@ -103,11 +103,17 @@ properties:
             rulesType: PREDEFINED
             rulesFromRoleName: view  # Use predefined role named "view"
           - type: Role               # This is a namespaced Role
+            rulesType: CUSTOM        # We specify our own custom RBAC rules
+            rules:
+              - apiGroups: ['apps.kubernetes.io', '']
+                resources: ['applications', 'pods']
+                verbs: ['*']
+          - type: ClusterRole
             rulesType: CUSTOM
             rules:
-              - apiGroups: [ 'apps.kubernetes.io' ]
-                resources: [ 'applications' ]
-                verbs: [ '*' ]
+              - apiGroups: ['etcd.database.coreos.com', '']
+                resources: ['etcdclusters', 'pods']
+                verbs: ['*']
   artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:
@@ -133,11 +139,11 @@ properties:
   artifactory-ha.artifactory.primary.resources.requests.cpu:
     title: CPU units for primary node
     type: string
-    default: "100m"
+    default: "500m"
   artifactory-ha.artifactory.primary.resources.requests.memory:
     title: Memory for primary node
     type: string
-    default: "1024M"
+    default: "1Gi"
   artifactory-ha.artifactory.primary.resources.limits.cpu:
     title: CPU units for primary node (limit)
     type: string
@@ -145,22 +151,22 @@ properties:
   artifactory-ha.artifactory.primary.resources.limits.memory:
     title: Memory for primary node (limit)
     type: string
-    default: "8G"
+    default: "8Gi"
   artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: "Artifactory Member Node count"
     description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
-    default: 3
+    default: 2
     minimum: 1
     maximum: 10
   artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
-    default: "100m"
+    default: "500m"
   artifactory-ha.artifactory.node.resources.requests.memory:
     title: Memory per node
     type: string
-    default: "2048M"
+    default: "2Gi"
   artifactory-ha.artifactory.node.resources.limits.cpu:
     title: CPU units per node (limit)
     type: string
@@ -191,11 +197,6 @@ properties:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
-  artifactory-ha.postgresql.enabled:
-    title: "Deploy Postgres using subchart"
-    description: "Deploys Postgres using Postgres subchart, not recommended for production usage"
-    default: false
-    type: boolean
   artifactory-ha.database.type:
     title: "Artifactory Database Type"
     description: "Which type of database you want Artifactory to use"
@@ -234,7 +235,7 @@ properties:
   xray.enabled:
     title: "Enable or disable the use of JFrog Xray"
     description: "True/False toggle switch to turn on/off JFrog Xray"
-    default: true
+    default: false
     type: boolean
   xray.xray.jfrogUrl:
     title: "JFrog Artifactory URL"

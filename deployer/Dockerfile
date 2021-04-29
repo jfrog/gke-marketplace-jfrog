@@ -14,6 +14,12 @@ RUN cat /tmp/chart/values.yaml \
     && mv /tmp/chart/values.yaml.new /tmp/chart/values.yaml \
     && cd /tmp && tar -czvf /tmp/artifactory-mp.tar.gz chart
 
+RUN cat /tmp/chart/Chart.yaml \
+    | env -i "TAG=$TAG" envsubst \
+    > /tmp/chart/Chart.yaml.new \
+    && mv /tmp/chart/Chart.yaml.new /tmp/chart/Chart.yaml \
+    && cd /tmp && tar -czvf /tmp/artifactory-mp.tar.gz chart
+
 RUN cd /tmp && tar -czvf /tmp/artifactory-mp.tar.gz chart
 
 ADD apptest/deployer/artifactory-ha /tmp/test/chart

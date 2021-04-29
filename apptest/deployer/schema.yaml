@@ -54,6 +54,13 @@ properties:
     description: "Enter the Artifactory Database password to be used"
     default: ""
     type: string
+  artifactory-ha.artifactory.node.replicaCount:
+    type: integer
+    title: "Artifactory Member Node count"
+    description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
+    default: 2
+    minimum: 1
+    maximum: 10
   xray.enabled:
     title: "Enable or disable the use of JFrog Xray"
     description: "True/False toggle switch to turn on/off JFrog Xray"
