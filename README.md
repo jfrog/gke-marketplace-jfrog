@@ -51,7 +51,7 @@ export CLUSTER=artifactory-ha-cluster
 export ZONE=us-west1-a
 
 # set the machine type for the cluster
-export MACHINE_TYPE=n1-standard-4
+export MACHINE_TYPE=e2-standard-4
 
 # create the cluster using google command line tools
 gcloud container clusters create "$CLUSTER" --zone "$ZONE" --machine-type "$MACHINE_TYPE"
@@ -137,15 +137,15 @@ Postgres database can be deployed and configured using steps below:
 
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm install postgres bitnami/postgresql --set persistence.size=500Gi ## install in your own namespace
+helm install postgres bitnami/postgresql -n $NAMESPACE --set persistence.size=500Gi
 
 ```
 The steps above will create the Postgresql Pod but now we need to create and configure the database for Artifactory as well as Xray. Please follow the steps below to configure databases:
 
-The output of command above (helm install postgres bitnami/postgresql --set persistence.size=500Gi,service.type=LoadBalancer) will provide steps for configuring database:
+The output of command above (helm install postgres bitnami/postgresql -n $NAMESPAC --set persistence.size=500Gi,service.type=LoadBalancer) will provide steps for configuring database:
 ```
-export POSTGRES_PASSWORD=$(kubectl get secret -–namespace default postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
-kubectl run postgres-postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:11.9.0-debian-10-r73 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U postgres -d postgres -p 5432
+export POSTGRES_PASSWORD=$(kubectl get secret -–namespace $NAMESPACE postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+kubectl run postgres-postgresql-client --rm --tty -i --restart='Never' --namespace $NAMESPACE --image docker.io/bitnami/postgresql:11.9.0-debian-10-r73 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U postgres -d postgres -p 5432
 ```
 The output of that command will take you to the Postgresql console. Use following commands for creating the Database user and also providing privileges for the database
 ```
@@ -177,14 +177,14 @@ Join key should be the same for Artifactory and Xray, otherwise Xray won't be ab
 Create TLS k8s secret, if needed: 
 
 ```
-kubectl create secret tls unified-tls-ingress --cert=certfile.crt --key=keyfile.key
+kubectl create secret tls unified-tls-ingress --namespace=$NAMESPACE --cert=certfile.crt --key=keyfile.key
 ```
 
 Optional - add k8s license secret. You can also add a license/licenses after the installation using [Install HA cluster license API](https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API#ArtifactoryRESTAPI-InstallHAClusterLicenses) or 
 using [Artifactory UI](https://www.jfrog.com/confluence/display/JFROG/Managing+Licenses#ManagingLicenses-LicensesManagement)
 
 ```
-kubectl create secret generic artifactory-license --from-file=artifactory.cluster.license 
+kubectl create secret generic artifactory-license --namespace=$NAMESPACE --from-file=artifactory.cluster.license 
 ```
 Create JSON document with installation parameters, replace <POSTGRES_CLUSTER_IP> with actual Postgresql Load balancer external IP or cluster IP address. 
 Assign this document to environment variable $ARGS_JSON. 
@@ -194,7 +194,7 @@ Example of parameters to deploy **Artifactory** and **Xray** with external Postg
 ```
 export ARGS_JSON='{
   "name": "unified",
-  "namespace": "default",
+  "namespace": "<YOUR_NAMESPACE>",
   "xray.enabled": true,
   "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress",
   "artifactory-ha.nginx.service.ssloffload": true,
@@ -219,7 +219,7 @@ Example of parameters to install **Artifactory** only, with external Postgresql:
 ```
 export ARGS_JSON='{
   "name": "unified",
-  "namespace": "default",
+  "namespace": "<YOUR_NAMESPACE>",
   "xray.enabled": false,
   "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress",
   "artifactory-ha.nginx.service.ssloffload": true,
