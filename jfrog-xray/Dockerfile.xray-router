@@ -1,4 +1,6 @@
-FROM releases-docker.jfrog.io/jfrog/router:7.15.3
+ARG TAG
+
+FROM releases-docker.jfrog.io/jfrog/router:${TAG}
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-router /docker/xray/Dockerfile.GKE
 COPY xray.default /opt/jfrog/xray/app/bin

@@ -1,4 +1,6 @@
-FROM releases-docker.jfrog.io/jfrog/xray-indexer:3.18.1
+ARG TAG
+
+FROM releases-docker.jfrog.io/jfrog/xray-indexer:${TAG}
 ADD THIRD-PARTY-LICENSES /third-party-oss/
 ADD Dockerfile.xray-indexer /docker/xray/Dockerfile.GKE
 COPY xray.default /opt/jfrog/xray/app/bin

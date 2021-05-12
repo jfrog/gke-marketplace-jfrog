@@ -1,4 +1,6 @@
-FROM releases-docker.jfrog.io/jfrog/artifactory-pro:7.15.4
+ARG TAG
+
+FROM releases-docker.jfrog.io/jfrog/artifactory-pro:${TAG}
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/

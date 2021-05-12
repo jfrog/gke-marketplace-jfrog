@@ -210,8 +210,8 @@ export ARGS_JSON='{
   "xray.database.password": "password",
   "xray.database.url": "postgres://<POSTGRES_CLUSTER_IP>:5432/xraydb?sslmode=disable",
   "xray.xray.jfrogUrl": "http://unified-nginx",
-  "xray.xray.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173",
-  "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+  "xray.xray.joinKey": "<ARTIFACTORY_JOIN_KEY>",
+  "artifactory-ha.artifactory.joinKey": "<MASTER_KEY>"
 }'
 ```
 
@@ -232,7 +232,7 @@ export ARGS_JSON='{
   "artifactory-ha.database.user": "artifactory",
   "artifactory-ha.database.password": "<YOUR_PASSWORD>",
   "xray.database.url": "postgres://<POSTGRES_CLUSTER_IP>:5432/xraydb?sslmode=disable",
-  "artifactory-ha.artifactory.joinKey": "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+  "artifactory-ha.artifactory.joinKey": "<ARTIFACTORY_JOIN_KEY>"
 }'
 ```
 
