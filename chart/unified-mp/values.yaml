@@ -26,9 +26,9 @@ xray:
 #  persist:
 #    image:
 #      tag: '$TAG'
-  router:
-    image:
-      tag: '$TAG'
+#  router:
+#    image:
+#      tag: '$TAG'
 #  server:
 #    image:
 #      tag: '$TAG'
