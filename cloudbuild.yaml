@@ -1,0 +1,325 @@
+#substitutions:
+#  _RT_VERSION: '7.19.4'
+#  _XRAY_VERSION: '3.25.1'
+#  _ROUTER_VERSION: '7.18.2'
+#  _DEPLOYER_TAG: '7.19'
+#  _BRANCH_NAME: '7.11.5-unified'
+steps:
+ - name: 'gcr.io/cloud-builders/git'
+   id: Clone repository
+   args:
+     - 'clone'
+     - '-b'
+     - '${_BRANCH_NAME}'
+     - 'https://github.com/jfrog/gke-marketplace-jfrog.git'
+ - name: 'gcr.io/cloud-builders/git'
+   id: check branch repository
+   args:
+     - 'branch'
+   dir: 'gke-marketplace-jfrog/jfrog-artifactory'
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Artifactory Image
+   args:
+   - 'build'
+   - '-f'
+   - 'Dockerfile.artifactory'
+   - '--build-arg'
+   - 'TAG=${_RT_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory:${_RT_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory:${_DEPLOYER_TAG}'
+   - '.'
+   dir: 'gke-marketplace-jfrog/jfrog-artifactory'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Artifactory Deployer tag Image
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory:${_DEPLOYER_TAG}'
+
+ - name: gcr.io/cloud-builders/docker
+   id: Push Artifactory Tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory:${_RT_VERSION}'
+ - name: 'gcr.io/cloud-builders/gcloud'
+   entrypoint: "bash"
+   args: 
+     - "-c"
+     - |
+         #gcloud config set project jfrog-partnership-team
+         #gcloud config set compute/zone asia-southeast1-a
+         #gcloud config list
+         #gcloud container clusters create anup-cluster --machine-type=f1-micro --preemptible --zone=asia-southeast1-a
+         #kubectl get nodes
+         ls 
+         
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Artifactory-Nginx Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_RT_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/nginx-artifactory-pro:$_RT_VERSION'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/nginx-artifactory-pro:$_DEPLOYER_TAG'
+   - '-f'
+   - 'Dockerfile.nginx'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-artifactory'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Artifactory-Nginx Artifactory tag Image
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/nginx-artifactory-pro:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Artifactory-Nginx Deployer tag Image
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/nginx-artifactory-pro:$_DEPLOYER_TAG'
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Xray-Analysis Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_XRAY_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_XRAY_VERSION'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_RT_VERSION'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_DEPLOYER_TAG'
+   - '-f'
+   - 'Dockerfile.xray-analysis'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-xray'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Analysis xray tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_XRAY_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Analysis Artifactory tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Analysis Deployer tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-analysis:$_DEPLOYER_TAG'
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Xray-Server Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_XRAY_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_XRAY_VERSION'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_RT_VERSION'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_DEPLOYER_TAG'
+   - '-f'
+   - 'Dockerfile.xray-server'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-xray'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Server xray tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_XRAY_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Server Artifactory tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Server Deployer tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-server:$_DEPLOYER_TAG'
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Xray-Indexer Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_XRAY_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-indexer:$_XRAY_VERSION'
+   - '-f'
+   - 'Dockerfile.xray-indexer'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-xray'  
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Indexer xray tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-indexer:$_XRAY_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Indexer Artifactory tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-indexer:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Indexer Deployer tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-indexer:$_DEPLOYER_TAG'  
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Xray-Persist Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_XRAY_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-persist:$_XRAY_VERSION'
+   - '-f'
+   - 'Dockerfile.xray-persist'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-xray'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Persist xray tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-persist:$_XRAY_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Persist Artifactory tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-persist:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Persist Deployer tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-persist:$_DEPLOYER_TAG'  
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Xray-Router Image
+   args:
+   - 'build'
+   - '--build-arg'
+   - 'TAG=${_ROUTER_VERSION}'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-router:${_ROUTER_VERSION}'
+   - '-f'
+   - 'Dockerfile.xray-router'
+   - '.' 
+   dir: 'gke-marketplace-jfrog/jfrog-xray'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Router xray tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-router:$_XRAY_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Router Artifactory tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-router:$_RT_VERSION'
+ - name: gcr.io/cloud-builders/docker
+   id: Push Xray-Router Deployer tag
+   args:
+     - 'push'
+     - 'gcr.io/$PROJECT_ID/jfrog-artifactory/xray-router:$_DEPLOYER_TAG'  
+ - name: gcr.io/cloud-builders/kubectl
+   id: Configure kubectl
+   args:
+     - cluster-info
+   env:
+     - CLOUDSDK_COMPUTE_REGION=us-central1-b
+     - CLOUDSDK_CONTAINER_CLUSTER=anup-cloudbuild
+     - KUBECONFIG=/workspace/.kube/config
+ - name: gcr.io/$PROJECT_ID/helm
+   id: Add repo chart
+   args:
+     - repo
+     - add 
+     - jfrog 
+     - https://charts.jfrog.io
+   env:
+     - KUBECONFIG=/workspace/.kube/config
+ - name: gcr.io/$PROJECT_ID/helm
+   id: update chart
+   args:
+     - dependency
+     - build
+   dir: 'chart/unified-mp'
+   env:
+     - KUBECONFIG=/workspace/.kube/config
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Deployer Image
+   args:
+   - 'build'
+   - '-f'
+   - 'deployer/Dockerfile'
+   - '--no-cache'
+   - '--build-arg'
+   - 'TAG=${_RT_VERSION}'
+   - '--build-arg'
+   - 'REGISTRY=gcr.io/$PROJECT_ID/jfrog-artifactory'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/deployer:${_DEPLOYER_TAG}'
+   - '.'
+ - name: 'gcr.io/cloud-builders/docker'
+   id: Build Tester Image
+   args:
+   - 'build'
+   - '-f'
+   - 'Dockerfile'
+   - '--no-cache'
+   - '-t'
+   - 'gcr.io/$PROJECT_ID/jfrog-artifactory/tester:${_RT_VERSION}'
+   - '.'
+   dir: 'apptest/tester'
+ - name: 'gcr.io/cloud-builders/gcloud'
+   entrypoint: "bash"
+   args: 
+     - "-c"
+     - |
+         ls ./chart/unified-mp/charts/
+         chmod +x script.bash scripts/mpdev        
+ - name: 'gcr.io/$PROJECT_ID/remote-builder'
+   entrypoint: 'bash'
+   args:
+   - '-eEuo'
+   - 'pipefail'
+   - '-c'
+   - |-
+    ./script.bash
+
+#- name: 'bash'
+#   #entrypoint: "bash"
+#   args: [ './script.bash' ]
+   
+   
+   
+   #args:  [ 'bash',  './scripts/mpdev', 'install', '--deployer=gcr.io/$PROJECT_ID/jfrog-artifactory/deployer:19', '--parameters="{ "name": "unified", "namespace": "default", "xray.enabled": true, "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress", "artifactory-ha.nginx.service.ssloffload": true, "artifactory-ha.artifactory.node.replicaCount": 1, "artifactory-ha.artifactory.license.secret": "artifactory-license", "artifactory-ha.artifactory.license.dataKey": "artifactory.cluster.license", "artifactory-ha.database.type": "postgresql", "artifactory-ha.database.driver": "org.postgresql.Driver", "artifactory-ha.database.url": "jdbc:postgresql://10.3.248.100:5432/artifactory", "artifactory-ha.database.user": "artifactory", "artifactory-ha.database.password": "password", "xray.database.user": "artifactory", "xray.database.password": "password", "xray.database.url": "postgres://10.3.248.100:5432/xraydb?sslmode=disable", "xray.xray.jfrogUrl": "http://unified-nginx", "xray.xray.joinKey": "3d574bfedf8e7601de7bd22ee211d18e2e0cb38ce596fb4f90a770912edc9d52", "artifactory-ha.artifactory.joinKey": "3d574bfedf8e7601de7bd22ee211d18e2e0cb38ce596fb4f90a770912edc9d52" }"']
+
+#         "sh scripts/mpdev install --deployer=gcr.io/$PROJECT_ID/jfrog-artifactory/deployer:19 --parameters='{ "name": "unified", "namespace": "default", "xray.enabled": true, "artifactory-ha.nginx.tlsSecretName": "unified-tls-ingress", "artifactory-ha.nginx.service.ssloffload": true, "artifactory-ha.artifactory.node.replicaCount": 1, "artifactory-ha.artifactory.license.secret": "artifactory-license", "artifactory-ha.artifactory.license.dataKey": "artifactory.cluster.license", "artifactory-ha.database.type": "postgresql", "artifactory-ha.database.driver": "org.postgresql.Driver", "artifactory-ha.database.url": "jdbc:postgresql://10.3.248.100:5432/artifactory", "artifactory-ha.database.user": "artifactory", "artifactory-ha.database.password": "password", "xray.database.user": "artifactory", "xray.database.password": "password", "xray.database.url": "postgres://10.3.248.100:5432/xraydb?sslmode=disable", "xray.xray.jfrogUrl": "http://unified-nginx", "xray.xray.joinKey": "3d574bfedf8e7601de7bd22ee211d18e2e0cb38ce596fb4f90a770912edc9d52", "artifactory-ha.artifactory.joinKey": "3d574bfedf8e7601de7bd22ee211d18e2e0cb38ce596fb4f90a770912edc9d52" }'"
+         
+   env:
+     - name=unified
+     - namespace=default
+     - xray.enabled=true
+     - artifactory-ha.nginx.tlsSecretName=unified-tls-ingress
+     - artifactory-ha.nginx.service.ssloffload=true
+     - artifactory-ha.artifactory.node.replicaCount=1
+     - artifactory-ha.artifactory.license.secret=artifactory-license
+     - artifactory-ha.artifactory.license.dataKey=artifactory.cluster.license
+     - artifactory-ha.database.type=postgresql
+     - artifactory-ha.database.driver=org.postgresql.Driver
+     - artifactory-ha.database.url=jdbc:postgresql://postgres-postgresql:5432/artifactory
+     - artifactory-ha.database.user=artifactory
+     - artifactory-ha.database.password=password
+     - xray.database.user=artifactory
+     - xray.database.password=password
+# - name: gcr.io/$PROJECT_ID/helm
+#   id: Deploy chart
+#   args:
+#     - install
+#     - postgres
+#     - bitnami/postgresql
+#     - --set
+#     - persistence.size=20Gi
+#   env:
+#     - KUBECONFIG=/workspace/.kube/config
