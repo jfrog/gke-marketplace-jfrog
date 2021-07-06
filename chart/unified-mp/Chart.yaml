@@ -1,7 +1,7 @@
 engine: gotpl
 name: unified-mp
 home: https://www.jfrog.com/artifactory/
-version: 107.18.6
+version: 107.21.3
 appVersion: '$TAG'
 description: Universal Repository Manager supporting all major packaging formats,
   build tools and CI servers.
