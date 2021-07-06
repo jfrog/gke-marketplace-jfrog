@@ -16,7 +16,7 @@ xray:
   # sleep the xray to let artifactory come up first
   common:
     xrayVersion: '$TAG'
-    preStartCommand: "until nc -z -w 2 unified-nginx 80; do sleep 300; exit 0;  done"
+    preStartCommand: "until curl -I unified-nginx:80; do sleep 300; exit 0; done"
 #  analysis:
 #    image:
 #      tag: '$TAG'
