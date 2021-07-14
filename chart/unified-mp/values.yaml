@@ -3,6 +3,36 @@ installer:
   type: helm
   platform: gke-marketplace
 
+artifactory-ha:
+  installerInfo: '{"productId":"GKE_artifactory-ha/1.0.0","features":[{"featureId":"Partner/ACC-007222"}]}'
+  postgresql:
+    enabled: false
+
+xray:
+  enabled: true
+  unifiedUpgradeAllowed: true
+  postgresql:
+    enabled: false
+  # sleep the xray to let artifactory come up first
+  common:
+    xrayVersion: '$TAG'
+    preStartCommand: "until nc -z -w 2 unified-nginx 80; do sleep 300; exit 0;  done"
+#  analysis:
+#    image:
+#      tag: '$TAG'
+#  indexer:
+#    image:
+#      tag: '$TAG'
+#  persist:
+#    image:
+#      tag: '$TAG'
+  router:
+    image:
+      tag: '$TAG'
+#  server:
+#    image:
+#      tag: '$TAG'
+
 ## Role Based Access Control
 ## Ref: https://kubernetes.io/docs/admin/authorization/rbac/
 rbac:

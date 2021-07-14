@@ -6,10 +6,10 @@ x-google-marketplace:
   # The release version is required in the schema and MUST match the
   # release tag on the the deployer.
   # This version will be used as an image tag for Artifactory and Nginx images
-  publishedVersion: '7.4.1'
+  publishedVersion: '$TAG'
   publishedVersionMetadata:
     releaseNote: >-
-      Initial release.
+      Unified Artifactory and Xray Marketplace Version 1.0.0
     # releaseTypes list is optional.
     # "Security" should only be used if this is an important update to patch
     # an existing vulnerability, as such updates will display more prominently for users.
@@ -24,15 +24,59 @@ x-google-marketplace:
   images:
     '':  # Primary image has no name.
       properties:
+        artifactory-ha.artifactory.image.registry:
+          type: REGISTRY
         artifactory-ha.artifactory.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY      
         artifactory-ha.artifactory.image.version:
           type: TAG
     nginx-artifactory-pro:
       properties:
+        artifactory-ha.nginx.image.registry:
+          type: REGISTRY
         artifactory-ha.nginx.image.repository:
-          type: REPO_WITH_REGISTRY
+          type: REPO_WITHOUT_REGISTRY     
         artifactory-ha.nginx.image.version:
+          type: TAG
+    xray-server:
+      properties:
+        xray.server.image.registry:
+          type: REGISTRY
+        xray.server.image.repository:
+          type: REPO_WITHOUT_REGISTRY
+        xray.server.image.version:
+          type: TAG
+    xray-analysis:
+      properties:
+        xray.analysis.image.registry:
+          type: REGISTRY
+        xray.analysis.image.repository:
+          type: REPO_WITHOUT_REGISTRY
+        xray.indexer.image.version:
+          type: TAG       
+    xray-indexer:
+      properties:
+        xray.indexer.image.registry:
+          type: REGISTRY
+        xray.indexer.image.repository:
+          type: REPO_WITHOUT_REGISTRY
+        xray.indexer.image.version:
+          type: TAG
+    xray-persist:
+      properties:
+        xray.persist.image.registry:
+          type: REGISTRY     
+        xray.persist.image.repository:
+          type: REPO_WITHOUT_REGISTRY
+        xray.persist.image.version:
+          type: TAG
+    xray-router:
+      properties:
+        xray.router.image.registry:
+          type: REGISTRY       
+        xray.router.image.repository:
+          type: REPO_WITHOUT_REGISTRY
+        xray.router.image.version:
           type: TAG
 
 # Other fields, like clusterConstraints, can be included here.
@@ -50,6 +94,26 @@ properties:
     type: string
     x-google-marketplace:
       type: SERVICE_ACCOUNT
+      serviceAccount:
+        description: >
+          Monitors cluster-wide app dependencies,
+          managing CoreOS application instances and their clusters.
+        roles:
+          - type: ClusterRole        # This is a cluster-wide ClusterRole
+            rulesType: PREDEFINED
+            rulesFromRoleName: view  # Use predefined role named "view"
+          - type: Role               # This is a namespaced Role
+            rulesType: CUSTOM        # We specify our own custom RBAC rules
+            rules:
+              - apiGroups: ['apps.kubernetes.io', '']
+                resources: ['applications', 'pods']
+                verbs: ['*']
+          - type: ClusterRole
+            rulesType: CUSTOM
+            rules:
+              - apiGroups: ['etcd.database.coreos.com', '']
+                resources: ['etcdclusters', 'pods']
+                verbs: ['*']
   artifactory-ha.postgresql.postgresqlPassword:
     type: string
     x-google-marketplace:
@@ -63,6 +127,11 @@ properties:
     description: "You can generate one with the command: openssl rand -hex 32"
     default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
     type: string
+  artifactory-ha.artifactory.joinKey:
+    title: "Artifactory requires a unique join key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    type: string
   artifactory-ha.artifactory.persistence.size:
     title: Disk allocation to Artifactory nodes
     type: string
@@ -70,11 +139,11 @@ properties:
   artifactory-ha.artifactory.primary.resources.requests.cpu:
     title: CPU units for primary node
     type: string
-    default: "100m"
+    default: "500m"
   artifactory-ha.artifactory.primary.resources.requests.memory:
     title: Memory for primary node
     type: string
-    default: "1024M"
+    default: "1Gi"
   artifactory-ha.artifactory.primary.resources.limits.cpu:
     title: CPU units for primary node (limit)
     type: string
@@ -82,7 +151,7 @@ properties:
   artifactory-ha.artifactory.primary.resources.limits.memory:
     title: Memory for primary node (limit)
     type: string
-    default: "8G"
+    default: "8Gi"
   artifactory-ha.artifactory.node.replicaCount:
     type: integer
     title: "Artifactory Member Node count"
@@ -93,11 +162,11 @@ properties:
   artifactory-ha.artifactory.node.resources.requests.cpu:
     title: CPU units per node
     type: string
-    default: "100m"
+    default: "500m"
   artifactory-ha.artifactory.node.resources.requests.memory:
     title: Memory per node
     type: string
-    default: "2048M"
+    default: "2Gi"
   artifactory-ha.artifactory.node.resources.limits.cpu:
     title: CPU units per node (limit)
     type: string
@@ -115,6 +184,11 @@ properties:
     description: "Nginx Service Type. LoadBalancer/NodePort/ClusterIP"
     default: "LoadBalancer"
     type: string
+  artifactory-ha.nginx.service.ssloffload:
+    title: "Nginx SSL offload"
+    description: "Offload the SSL decryption processing from backend servers"
+    default: false
+    type: boolean
   artifactory-ha.nginx.service.loadBalancerIP:
     title: "Provide static ip address"
     description: "Provide static ip address for LoadBalancer. Optional for GKE."
@@ -123,11 +197,80 @@ properties:
     title: "Nginx SSL Secret name"
     description: "The SSL secret that will be used by the Nginx pod"
     type: string
+  artifactory-ha.database.type:
+    title: "Artifactory Database Type"
+    description: "Which type of database you want Artifactory to use"
+    default: "postgresql"
+    type: string
+  artifactory-ha.database.driver:
+    title: "Artifactory Database Driver"
+    description: "Which database driver you want Artifactory to use"
+    default: "org.postgresql.Driver"
+    type: string
+  artifactory-ha.database.url:
+    title: "Artifactory Database JDBC URL"
+    description: "Enter the Artifactory Database JBDC URL to be used"
+    default: "jdbc:postgresql://postgres-postgresql:5432/artifactory"
+    type: string
+  artifactory-ha.database.user:
+    title: "Artifactory Database User"
+    description: "Enter the Artifactory Database username to be used"
+    default: "artifactory"
+    type: string
+  artifactory-ha.database.password:
+    title: "Artifactory Database Password"
+    description: "Enter the Artifactory Database password to be used"
+    default: "password"
+    type: string
+  artifactory-ha.artifactory.license.secret:
+    title: "Artifactory License K8s Secret Name"
+    description: "Enter the K8s secret name used for the Artifactory License"
+    default: ""
+    type: string
+  artifactory-ha.artifactory.license.dataKey:
+    title: "Artifactory License K8s Secret Data Key"
+    description: "Enter the key name used for the Artifactory License k8s secret"
+    default: ""
+    type: string
+  xray.enabled:
+    title: "Enable or disable the use of JFrog Xray"
+    description: "True/False toggle switch to turn on/off JFrog Xray"
+    default: false
+    type: boolean
+  xray.xray.jfrogUrl:
+    title: "JFrog Artifactory URL"
+    description: "Enter the Artifactory URL for Xray to connect to"
+    default: "http://unified-nginx"
+    type: string
+  xray.xray.masterKey:
+    title: "Xray Master Key"
+    description: "Use the same master key as Artifactory"
+    default: "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+    type: string
+  xray.xray.joinKey:
+    title: "Xray Join Key"
+    description: "Use the same join key as Artifactory"
+    default: "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+    type: string
+  xray.database.url:
+    title: "Xray Postgresql Database URL"
+    description: "Enter the Postgresql Database URL for Xray"
+    default: "postgres://postgres-postgresql:5432/xraydb?sslmode=disable"
+    type: string
+  xray.database.user:
+    title: "Xray Database User"
+    description: "Enter the Postgresql User for Xray"
+    default: "artifactory"
+    type: string
+  xray.database.password:
+    title: "Xray Database Password"
+    description: "Enter the Postgresql Password for Xray"
+    default: "password"
+    type: string
 required:
   - name
   - namespace
   - artifactory-ha.serviceAccount.name
-  - artifactory-ha.postgresql.postgresqlPassword
   - artifactory-ha.artifactory.masterKey
   - artifactory-ha.artifactory.node.replicaCount
   - artifactory-ha.artifactory.persistence.size
@@ -141,3 +284,9 @@ required:
   - artifactory-ha.artifactory.node.resources.limits.memory
   - artifactory-ha.artifactory.javaOpts.other
   - artifactory-ha.nginx.service.type
+  - artifactory-ha.database.type
+  - artifactory-ha.database.driver
+  - artifactory-ha.database.url
+  - artifactory-ha.database.user
+  - artifactory-ha.database.password
+  - xray.enabled

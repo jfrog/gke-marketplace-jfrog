@@ -1,4 +1,6 @@
-FROM docker.bintray.io/jfrog/nginx-artifactory-pro:7.4.1
+ARG TAG
+
+FROM releases-docker.jfrog.io/jfrog/nginx-artifactory-pro:$TAG
 
 ADD sources /third-party-oss/sources/
 ADD THIRD-PARTY-LICENSES /third-party-oss/

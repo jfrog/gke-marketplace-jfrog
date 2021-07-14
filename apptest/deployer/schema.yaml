@@ -1,0 +1,78 @@
+properties:
+  testerImage:
+    type: string
+    default: $REGISTRY/tester:$TAG
+    x-google-property:
+      type: IMAGE
+  artifactory-ha.postgresql.enabled:
+    title: "Deploy Postgres using subchart"
+    description: "Deploys Postgres using Postgres subchart, not recommended for production usage"
+    default: true
+    type: boolean
+  artifactory-ha.artifactory.masterKey:
+    title: 'Artifactory requires a unique master key'
+    description: 'You can generate one with the command: openssl rand -hex 32'
+    default: '13661eac288a991c10bb2effd9ebd7e13f910b03a3127e9af175efbfa59d173d'
+    type: string
+  artifactory-ha.artifactory.joinKey:
+    title: "Artifactory requires a unique join key"
+    description: "You can generate one with the command: openssl rand -hex 32"
+    default: "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+    type: string
+  xray.xray.masterKey:
+    title: "Xray Master Key"
+    description: "Use the same master key as Artifactory"
+    default: "0b40b48f3f80eff97bd5c15a27cfbf041ed8b89e49e6b7d7b4450c75f7ba5006"
+    type: string
+  xray.xray.joinKey:
+    title: "Xray Join Key"
+    description: "Use the same join key as Artifactory"
+    default: "aef90c361f4edc554f95b116b5e1a09c28c050ee691e17eee7e591d2ffbc2173"
+    type: string
+  artifactory-ha.database.type:
+    title: "Artifactory Database Type"
+    description: "Which type of database you want Artifactory to use"
+    default: ""
+    type: string
+  artifactory-ha.database.driver:
+    title: "Artifactory Database Driver"
+    description: "Which database driver you want Artifactory to use"
+    default: ""
+    type: string
+  artifactory-ha.database.url:
+    title: "Artifactory Database JDBC URL"
+    description: "Enter the Artifactory Database JBDC URL to be used"
+    default: ""
+    type: string
+  artifactory-ha.database.user:
+    title: "Artifactory Database User"
+    description: "Enter the Artifactory Database username to be used"
+    default: ""
+    type: string
+  artifactory-ha.database.password:
+    title: "Artifactory Database Password"
+    description: "Enter the Artifactory Database password to be used"
+    default: ""
+    type: string
+  artifactory-ha.artifactory.node.replicaCount:
+    type: integer
+    title: "Artifactory Member Node count"
+    description: "Artifactory Member Node count (1 Primary + 2 Member = 3 Node Cluster)"
+    default: 2
+    minimum: 1
+    maximum: 10
+  xray.enabled:
+    title: "Enable or disable the use of JFrog Xray"
+    description: "True/False toggle switch to turn on/off JFrog Xray"
+    default: false
+    type: boolean
+  xray.postgresql.postgresqlUsername:
+    title: "Xray Postgresql Database username (use if Postgres subchart deployment is enabled)"
+    description: "Enter Postgresql Password for Xray"
+    default: "artifactory"
+    type: string
+  xray.postgresql.postgresqlPassword:
+    title: "Xray Postgresql Database password (use if Postgres subchart deployment is enabled)"
+    description: "Enter Postgresql Password for Xray"
+    default: "password"
+    type: string

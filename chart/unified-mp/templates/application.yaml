@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/name: "{{ .Release.Name }}"
 spec:
   descriptor:
-    type: artifactory-ha
+    type: artifactory-xray
     version: "{{ .Chart.AppVersion }}"
     description: |-
       Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
@@ -31,19 +31,12 @@ spec:
     - description: 'JFrog Artifactory Chart'
       url: https://github.com/jfrog/charts
     notes: |-
-      ## Congratulations. You have just deployed JFrog Artifactory HA!
+      ## Congratulations. You have just deployed JFrog Artifactory Enterprise & Xray!
 
       ## Licenses are required.  If you need free trial licenses [click here](https://jfrog.com/artifactory/free-trial-onprem-google/#enterprise).
 
-      ## DATABASE:
-      To extract the database password, run the following
-      ```shell
-      export DB_PASSWORD=$(kubectl get --namespace {{ .Release.Namespace }} $(kubectl get secret --namespace {{ .Release.Namespace }} -o name | grep postgresql) -o jsonpath="{.data.postgres-password}" | base64 --decode)
-      echo ${DB_PASSWORD}
-      ```
-
       ## SETUP:
-      1. Get the Artifactory IP and URL
+      1. Get the Artifactory & Xray IP and URL
          NOTE: It may take a few minutes for the LoadBalancer public IP to be available!
 
          You can watch the status of the service by running `kubectl get svc -w {{ .Release.Name }}-nginx --namespace {{ .Release.Namespace }}`
@@ -63,9 +56,9 @@ spec:
     matchLabels:
       app.kubernetes.io/name: "{{ .Release.Name }}"
   componentKinds:
-  - group: apps/v1beta2
+  - group: apps/v1
     kind: Deployment
-  - group: apps/v1beta2
+  - group: apps/v1
     kind: StatefulSet
   - group: v1
     kind: PersistentVolumeClaim

@@ -1,0 +1,37 @@
+actions:
+  - name: Artifactory jfrt service check
+    bashTest:
+      script: |-
+        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'nginx*' | awk '{$2=$2};1' | cut -f4 -d ' ')
+        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[3].state")
+        echo "${STATUS}"
+      expect:
+        stdout:
+          contains: 'HEALTHY'
+  - name: Artifactory service check 1
+    bashTest:
+      script: |-
+        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'nginx*' | awk '{$2=$2};1' | cut -f4 -d ' ')
+        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[0].state")
+        echo "${STATUS}"
+      expect:
+        stdout:
+          contains: 'HEALTHY'
+  - name: Artifactory service check 2
+    bashTest:
+      script: |-
+        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'nginx*' | awk '{$2=$2};1' | cut -f4 -d ' ')
+        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[1].state")
+        echo "${STATUS}"
+      expect:
+        stdout:
+          contains: 'HEALTHY'
+  - name: Artifactory service check 3
+    bashTest:
+      script: |-
+        export IP_ADDRESS=$(kubectl get svc --namespace=${NAMESPACE} | grep LoadBalancer | grep 'nginx*' | awk '{$2=$2};1' | cut -f4 -d ' ')
+        export STATUS=$(curl -s -o --connect-timeout 5 http://${IP_ADDRESS}:80/router/api/v1/system/health | jq ".services[2].state")
+        echo "${STATUS}"
+      expect:
+        stdout:
+          contains: 'HEALTHY'

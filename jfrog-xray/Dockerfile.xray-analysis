@@ -1,0 +1,6 @@
+ARG TAG
+
+FROM releases-docker.jfrog.io/jfrog/xray-analysis:${TAG}
+ADD THIRD-PARTY-LICENSES /third-party-oss/
+ADD Dockerfile.xray-analysis /docker/xray/Dockerfile.GKE
+COPY xray.default /opt/jfrog/xray/app/bin
