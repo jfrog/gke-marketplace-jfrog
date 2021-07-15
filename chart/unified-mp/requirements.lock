@@ -1,9 +1,9 @@
 dependencies:
 - name: artifactory-ha
   repository: https://charts.jfrog.io
-  version: 107.18.6
+  version: 107.19.9
 - name: xray
   repository: https://charts.jfrog.io
-  version: 8.0.0
-digest: sha256:e3f3bb232020c24f087d95bb93430c2e9f5d2240f69b215c25e45befb0cb4157
-generated: "2021-05-10T20:00:58.214697-07:00"
+  version: 103.26.1
+digest: sha256:b8b5fa60207f6fe62dd4b342fb6410d669891f96fe5835bc6ba66288c6390f37
+generated: "2021-07-06T19:55:51.857079+05:30"
